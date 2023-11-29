@@ -3,6 +3,7 @@ extends Node2D
 @export var monster_name: String = "Monster"
 @export var bat_boost: int = 1
 @export var pitch_power: int = 1
+@export var monster_texture: Texture
 @export var pitch_result_card_resource: ResultCard
 @export var bat_result_card_resource: ResultCard
 
