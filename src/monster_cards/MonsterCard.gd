@@ -1,3 +1,4 @@
+class_name MonsterCard
 extends Node2D
 
 @export var monster_name: String = "Monster"
@@ -6,6 +7,9 @@ extends Node2D
 @export var monster_texture: Texture
 @export var pitch_result_card_resource: ResultCard
 @export var bat_result_card_resource: ResultCard
+
+@onready var monster_art: TextureRect = $MonsterArt
+@onready var monster_name_label: Label = $MonsterNameLabel
 
 var card_state: CardState = CardState.BATTER:
 	set(value):
@@ -32,6 +36,9 @@ func _ready():
 	if not pitch_result_card_resource or not bat_result_card_resource:
 		push_error("You need a pitch AND bat result resource in the monster card")
 		return
+	
+	monster_art.texture = monster_texture
+	monster_name_label.text = monster_name
 	
 	_fill_result_card_dictionaries()
 	

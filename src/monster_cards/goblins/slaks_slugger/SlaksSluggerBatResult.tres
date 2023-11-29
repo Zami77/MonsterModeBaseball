@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ResultCard" load_steps=2 format=3 uid="uid://bnr4hpxxn0j7y"]
+
+[ext_resource type="Script" path="res://src/monster_cards/ResultCard.gd" id="1_j2ur4"]
+
+[resource]
+script = ExtResource("1_j2ur4")
+strike_out_range = Array[int]([1, 2])
+fly_ball_range = Array[int]([3, 5])
+ground_ball_out_range = Array[int]([6, 7])
+single_range = Array[int]([8, 11])
+double_range = Array[int]([12, 16])
+triple_range = Array[int]([17, 19])
+home_run_range = Array[int]([20, 20])
