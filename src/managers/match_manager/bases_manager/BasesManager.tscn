@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckxdks178b2gg"]
+
+[ext_resource type="Script" path="res://src/managers/match_manager/bases_manager/BasesManager.gd" id="1_hehpq"]
+[ext_resource type="Texture2D" uid="uid://c70ssf6q8af5q" path="res://src/managers/match_manager/bases_manager/DALL·E 2023-11-28 21.36.28 - baseball diamond, cartoon style.png" id="2_3gt5b"]
+
+[node name="BasesManager" type="Node2D"]
+script = ExtResource("1_hehpq")
+
+[node name="BaseballDiamondTextureRect" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 640.0
+texture = ExtResource("2_3gt5b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HomeBase" type="Node2D" parent="."]
+position = Vector2(288, 384)
+
+[node name="FirstBase" type="Node2D" parent="."]
+position = Vector2(512, 160)
+
+[node name="SecondBase" type="Node2D" parent="."]
+position = Vector2(288, 96)
+
+[node name="ThirdBase" type="Node2D" parent="."]
+position = Vector2(32, 160)
