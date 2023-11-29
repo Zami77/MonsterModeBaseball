@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk8sldh8eka1f"]
+
+[ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
+
+[node name="MonsterCard" type="Node2D"]
+script = ExtResource("1_es3ja")
