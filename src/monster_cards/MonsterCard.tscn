@@ -1,15 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk8sldh8eka1f"]
+[gd_scene load_steps=6 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
+[ext_resource type="Texture2D" uid="uid://dwcqg0d7ohmp8" path="res://src/monster_cards/card_frame_prototype.PNG" id="2_edprv"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_v2dwo"]
+
+[sub_resource type="Animation" id="Animation_6ku2n"]
+resource_name = "monster_art_idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonsterArt:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-4, -8), Vector2(0, 0), Vector2(4, 8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lkm7v"]
+_data = {
+"monster_art_idle": SubResource("Animation_6ku2n")
+}
 
 [node name="MonsterCard" type="Node2D"]
 script = ExtResource("1_es3ja")
 
-[node name="CardFrame" type="ColorRect" parent="."]
+[node name="CardFrame" type="TextureRect" parent="."]
 offset_right = 192.0
 offset_bottom = 256.0
-color = Color(0, 0, 0, 0.807843)
+texture = ExtResource("2_edprv")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="MonsterArt" type="TextureRect" parent="."]
 offset_right = 192.0
@@ -24,3 +49,8 @@ theme = ExtResource("2_v2dwo")
 text = "Monster"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lkm7v")
+}

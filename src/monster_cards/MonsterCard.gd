@@ -10,6 +10,7 @@ extends Node2D
 
 @onready var monster_art: TextureRect = $MonsterArt
 @onready var monster_name_label: Label = $MonsterNameLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var card_state: CardState = CardState.BATTER:
 	set(value):
@@ -29,6 +30,9 @@ enum SwingResult {
 	TRIPLE=5, 
 	HOME_RUN=6
 }
+enum CardName {
+	SlaksSlugger = 0
+}
 
 const NO_RANGE = -1
 
@@ -39,6 +43,7 @@ func _ready():
 	
 	monster_art.texture = monster_texture
 	monster_name_label.text = monster_name
+	# animation_player.play("monster_art_idle")
 	
 	_fill_result_card_dictionaries()
 	
