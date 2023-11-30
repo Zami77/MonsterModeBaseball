@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Inning" load_steps=2 format=3 uid="uid://ckeet5k3l2dlc"]
+
+[ext_resource type="Script" path="res://src/managers/match_manager/Inning.gd" id="1_l86rs"]
+
+[resource]
+script = ExtResource("1_l86rs")
