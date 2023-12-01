@@ -38,6 +38,12 @@ func _load_scene(scene_path: String) -> void:
 	if current_scene is SettingsMenu:
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
 	
+	if current_scene is MatchManager:
+		current_scene.setup(
+			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM), 
+			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM)
+		)
+	
 	await transition_screen.faded_to_scene
 
 func _on_back_to_main_menu() -> void:
@@ -46,8 +52,7 @@ func _on_back_to_main_menu() -> void:
 func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 	match option:
 		MainMenu.Option.PLAY_GAME:
-			push_error("There's no game to go to! Add your game scene here!")
-			#_load_scene("PUT_YOUR_GAME_SCENE_PATH_HERE")
+			_load_scene(ScenePaths.match_manager)
 		MainMenu.Option.SETTINGS:
 			_load_scene(ScenePaths.settings_menu)
 		MainMenu.Option.CREDITS:

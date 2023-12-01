@@ -1,6 +1,8 @@
 class_name MonsterCard
 extends Node2D
 
+signal shook
+
 @export var monster_name: String = "Monster"
 @export var bat_boost: int = 1
 @export var pitch_power: int = 1
@@ -10,6 +12,7 @@ extends Node2D
 
 @onready var monster_art: TextureRect = $MonsterArt
 @onready var monster_name_label: Label = $MonsterNameLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var card_state: CardState = CardState.BATTER:
 	set(value):
@@ -29,6 +32,9 @@ enum SwingResult {
 	TRIPLE=5, 
 	HOME_RUN=6
 }
+enum CardName {
+	SlaksSlugger = 0
+}
 
 const NO_RANGE = -1
 
@@ -39,6 +45,7 @@ func _ready():
 	
 	monster_art.texture = monster_texture
 	monster_name_label.text = monster_name
+	# animation_player.play("monster_art_idle")
 	
 	_fill_result_card_dictionaries()
 	
@@ -62,16 +69,23 @@ func _fill_result_card_dictionaries() -> void:
 func _card_state_updated():
 	pass
 
+func shake() -> void:
+	animation_player.play("shake")
+	await animation_player.animation_finished
+	emit_signal("shook")
+
 func evaluate_swing_result(swing_value: int) -> SwingResult:
+	swing_value = clampi(swing_value, 1, 20)
+	
 	var result_card = bat_result_card
 	
 	if card_state == CardState.PITCHER:
 		result_card = pitch_result_card
 	
 	for swing_result in result_card.keys():
-		var range = bat_result_card
-		var low_range = range[0]
-		var high_range = range[1]
+		var swing_result_range = bat_result_card[swing_result]
+		var low_range = swing_result_range[0]
+		var high_range = swing_result_range[1]
 		
 		if low_range == NO_RANGE or high_range == NO_RANGE:
 			continue
