@@ -14,13 +14,16 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="HomeBase" type="Node2D" parent="."]
-position = Vector2(288, 384)
+position = Vector2(256, 384)
 
 [node name="FirstBase" type="Node2D" parent="."]
-position = Vector2(512, 160)
+position = Vector2(544, 128)
 
 [node name="SecondBase" type="Node2D" parent="."]
-position = Vector2(288, 96)
+position = Vector2(288, 32)
 
 [node name="ThirdBase" type="Node2D" parent="."]
-position = Vector2(32, 160)
+position = Vector2(32, 96)
+
+[node name="PitcherMound" type="Node2D" parent="."]
+position = Vector2(288, 128)

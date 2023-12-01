@@ -2,9 +2,12 @@ class_name MonsterTeam
 extends Resource
 
 @export var monster_characters: Array[MonsterCard.CardName]
+@export var monster_team_name: TeamName
 var score: int = 0
 var current_at_bat = 0
 var current_pitcher = 0
+
+enum TeamName { GOBLIN_TEAM }
 
 func get_next_at_bat() -> MonsterCard.CardName:
 	var monster_card_name = monster_characters[current_at_bat]

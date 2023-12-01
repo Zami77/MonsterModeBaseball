@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_tas00")
 monster_characters = Array[int]([0, 0, 0, 0])
+monster_team_name = 0
