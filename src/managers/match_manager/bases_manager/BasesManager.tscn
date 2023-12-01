@@ -27,3 +27,6 @@ position = Vector2(32, 96)
 
 [node name="PitcherMound" type="Node2D" parent="."]
 position = Vector2(288, 128)
+
+[node name="DugOut" type="Node2D" parent="."]
+position = Vector2(-160, 224)

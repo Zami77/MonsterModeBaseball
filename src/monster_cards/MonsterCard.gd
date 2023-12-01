@@ -1,6 +1,8 @@
 class_name MonsterCard
 extends Node2D
 
+signal shook
+
 @export var monster_name: String = "Monster"
 @export var bat_boost: int = 1
 @export var pitch_power: int = 1
@@ -66,6 +68,11 @@ func _fill_result_card_dictionaries() -> void:
 
 func _card_state_updated():
 	pass
+
+func shake() -> void:
+	animation_player.play("shake")
+	await animation_player.animation_finished
+	emit_signal("shook")
 
 func evaluate_swing_result(swing_value: int) -> SwingResult:
 	swing_value = clampi(swing_value, 1, 20)

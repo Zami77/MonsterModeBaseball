@@ -11,6 +11,7 @@ signal monster_moved_to_base
 @onready var second_base: Node2D = $SecondBase
 @onready var third_base: Node2D = $ThirdBase
 @onready var pitcher_mound: Node2D = $PitcherMound
+@onready var dug_out: Node2D = $DugOut
 
 enum BasePlate { HOME = 4, AT_BAT = 0, FIRST = 1, SECOND = 2, THIRD = 3 }
 
@@ -21,6 +22,16 @@ var base_layout: Array[MonsterCharacter] = [
 	null, # THIRD
 	null  # HOME
 ]
+var monsters_to_await = 0
+
+func handle_next_frame() -> void:
+	base_layout = [
+		null, # AT_BAT
+		null, # FIRST
+		null, # SECOND
+		null, # THIRD
+		null  # HOME
+	]
 
 func handle_swing_result(swing_result: MonsterCard.SwingResult, at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = at_bat
@@ -39,40 +50,62 @@ func handle_swing_result(swing_result: MonsterCard.SwingResult, at_bat: MonsterC
 			_handle_triple()
 		MonsterCard.SwingResult.HOME_RUN:
 			_handle_home_run()
-	
-	emit_signal("swing_result_handled")
 
 func _handle_strike_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
+	at_bat.monster_card.shake()
+	await at_bat.monster_card.shook
+	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
 func _handle_fly_ball(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
+	at_bat.monster_card.shake()
+	await at_bat.monster_card.shook
+	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
 func _handle_ground_ball_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
+	at_bat.monster_card.shake()
+	await at_bat.monster_card.shook
+	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
 func _handle_single() -> void:
 	for base_plate in BasePlate.FIRST:
+		monsters_to_await = 0
 		_advance_base(base_plate)
+		for i in monsters_to_await:
+			await monster_moved_to_base
+	emit_signal("swing_result_handled")
 
 func _handle_double() -> void:
 	for base_plate in BasePlate.SECOND:
+		monsters_to_await = 0
 		_advance_base(base_plate)
+		for i in monsters_to_await:
+			await monster_moved_to_base
+	emit_signal("swing_result_handled")
 
 func _handle_triple() -> void:
 	for base_plate in BasePlate.THIRD:
+		monsters_to_await = 0
 		_advance_base(base_plate)
+		for i in monsters_to_await:
+			await monster_moved_to_base
+	emit_signal("swing_result_handled")
 
 func _handle_home_run() -> void:
 	for base_plate in BasePlate.HOME:
+		monsters_to_await = 0
 		_advance_base(base_plate)
+		for i in monsters_to_await:
+			await monster_moved_to_base
+	emit_signal("swing_result_handled")
 
 func _advance_base(current_base: BasePlate) -> void:
 	if current_base >= BasePlate.HOME:
-		
 		return
 	
 	var monster_on_base: MonsterCharacter = base_layout[current_base]
@@ -82,9 +115,8 @@ func _advance_base(current_base: BasePlate) -> void:
 	
 	if base_layout[current_base + 1]:
 		_advance_base(current_base + 1)
-	
+	monsters_to_await += 1
 	_move_monster_to_base(current_base + 1, monster_on_base)
-	
 	base_layout[current_base] = null
 	base_layout[current_base + 1] = monster_on_base
 

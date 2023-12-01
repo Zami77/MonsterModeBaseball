@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk8sldh8eka1f"]
+[gd_scene load_steps=7 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
 [ext_resource type="Texture2D" uid="uid://dwcqg0d7ohmp8" path="res://src/monster_cards/card_frame_prototype.PNG" id="2_edprv"]
@@ -21,9 +21,26 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-4, -8), Vector2(0, 0), Vector2(4, 8), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_rxbos"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.2001, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(0, 0), Vector2(0, 0), Vector2(8, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lkm7v"]
 _data = {
-"monster_art_idle": SubResource("Animation_6ku2n")
+"monster_art_idle": SubResource("Animation_6ku2n"),
+"shake": SubResource("Animation_rxbos")
 }
 
 [node name="MonsterCard" type="Node2D"]
