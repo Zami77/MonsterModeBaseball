@@ -23,6 +23,10 @@ func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	home_team = _home_team
 	away_team = _away_team
 
+func _setup_inning() -> void:
+	# TODO: set up pitcher and batter by grabbing next from MonsterTeam
+	pass
+
 func _execute_swing() -> void:
 	match_state = MatchState.MID_PITCH_SWING
 

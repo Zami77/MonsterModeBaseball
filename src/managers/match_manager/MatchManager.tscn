@@ -8,8 +8,6 @@
 
 [node name="MatchManager" type="Node2D"]
 script = ExtResource("1_ccsw8")
-total_innings = null
-outs_per_inning = null
 inning = ExtResource("2_ywgey")
 
 [node name="BasesManager" parent="." instance=ExtResource("2_x2ck3")]
