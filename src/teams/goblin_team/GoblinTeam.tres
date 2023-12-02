@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/teams/MonsterTeam.gd" id="1_tas00"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_tas00")
-monster_characters = Array[int]([0, 0, 0, 0])
+monster_characters = Array[int]([0, 1, 0, 1])
 monster_team_name = 0

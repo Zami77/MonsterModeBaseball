@@ -10,6 +10,10 @@ signal all_monsters_in_dug_out
 
 @onready var bases_manager: BasesManager = $BasesManager
 @onready var pitch_swing_button: DefaultButton = $PitchSwingButton
+@onready var at_bat_label: Label = $GameStatsContainer/AtBatLabel
+@onready var inning_label: Label = $GameStatsContainer/InningLabel
+@onready var outs_label: Label = $GameStatsContainer/OutsLabel
+@onready var score_label: Label = $GameStatsContainer/ScoreLabel
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -34,6 +38,7 @@ func _ready() -> void:
 func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	home_team = _home_team
 	away_team = _away_team
+	_update_stats_container()
 	_setup_inning()
 
 func _setup_inning() -> void:
@@ -109,6 +114,8 @@ func _next_frame() -> void:
 	
 	if inning.current_inning > total_innings:
 		_end_match()
+	
+	_update_stats_container()
 
 func _move_monster_to_position(monster_character: MonsterCharacter, target_pos: Vector2) -> void:
 	var monster_move_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
@@ -126,6 +133,9 @@ func _on_run_scored(monster: MonsterCharacter) -> void:
 		away_team.score += 1
 	elif inning.current_frame == InningFrame.BOTTOM:
 		home_team.score += 1
+	
+	_update_stats_container()
+	
 	await get_tree().create_timer(1.0).timeout
 	remove_child(monster)
 	monster.queue_free()
@@ -137,6 +147,8 @@ func _on_out(monster: MonsterCharacter) -> void:
 	
 	if inning.current_outs >= outs_per_inning:
 		_next_frame()
+	
+	_update_stats_container()
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []
@@ -150,3 +162,11 @@ func _move_monsters_to_dug_out() -> void:
 		remove_child(monster)
 		monster.queue_free()
 	emit_signal("all_monsters_in_dug_out")
+
+func _update_stats_container() -> void:
+	at_bat_label.text = "At Bat: %s" % [
+		MonsterTeam.TeamName.keys()[away_team.monster_team_name] if inning.current_frame == InningFrame.TOP 
+		else MonsterTeam.TeamName.keys()[home_team.monster_team_name]]
+	inning_label.text = "%s of Inning %d" % [InningFrame.keys()[inning.current_frame], inning.current_inning]
+	outs_label.text = "Outs: %d" % [inning.current_outs]
+	score_label.text = "Home: %d Away: %d" % [home_team.score, away_team.score]
