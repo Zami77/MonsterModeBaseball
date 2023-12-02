@@ -4,6 +4,6 @@ extends Node
 static func get_monster_team(team_name: MonsterTeam.TeamName) -> Resource:
 	match team_name:
 		MonsterTeam.TeamName.GOBLIN_TEAM:
-			return ScenePaths.goblin_team_resource
+			return ScenePaths.goblin_team_resource.duplicate()
 		_:
-			return ScenePaths.goblin_team_resource
+			return ScenePaths.goblin_team_resource.duplicate()

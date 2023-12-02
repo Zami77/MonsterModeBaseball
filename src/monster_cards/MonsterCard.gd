@@ -33,7 +33,8 @@ enum SwingResult {
 	HOME_RUN=6
 }
 enum CardName {
-	SlaksSlugger = 0
+	SLAKS_SLUGGER = 0,
+	GLURM = 1
 }
 
 const NO_RANGE = -1

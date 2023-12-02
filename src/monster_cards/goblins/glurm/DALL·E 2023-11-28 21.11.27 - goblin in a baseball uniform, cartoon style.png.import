@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnfx373aonvcs"
-path="res://.godot/imported/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png-26aa40e7f6364667b328429a45b76194.ctex"
+path="res://.godot/imported/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png-599407d13b20eb3ba5438faf754f27c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/monster_cards/goblins/slaks_slugger/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png"
-dest_files=["res://.godot/imported/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png-26aa40e7f6364667b328429a45b76194.ctex"]
+source_file="res://src/monster_cards/goblins/glurm/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png"
+dest_files=["res://.godot/imported/DALL·E 2023-11-28 21.11.27 - goblin in a baseball uniform, cartoon style.png-599407d13b20eb3ba5438faf754f27c0.ctex"]
 
 [params]
 

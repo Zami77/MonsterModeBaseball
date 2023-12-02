@@ -20,3 +20,24 @@ offset_bottom = 511.0
 theme = ExtResource("4_buni1")
 text = "Pitch"
 script = ExtResource("5_t27ud")
+
+[node name="GameStatsContainer" type="VBoxContainer" parent="."]
+offset_left = 704.0
+offset_right = 1088.0
+offset_bottom = 576.0
+
+[node name="AtBatLabel" type="Label" parent="GameStatsContainer"]
+layout_mode = 2
+text = "At Bat:"
+
+[node name="InningLabel" type="Label" parent="GameStatsContainer"]
+layout_mode = 2
+text = "Top of Inning 1"
+
+[node name="OutsLabel" type="Label" parent="GameStatsContainer"]
+layout_mode = 2
+text = "Top of Inning 1"
+
+[node name="ScoreLabel" type="Label" parent="GameStatsContainer"]
+layout_mode = 2
+text = "Home: 0	 Away: 0"
