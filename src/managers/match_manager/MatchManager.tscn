@@ -13,31 +13,39 @@ inning = ExtResource("2_ywgey")
 [node name="BasesManager" parent="." instance=ExtResource("2_x2ck3")]
 
 [node name="PitchSwingButton" type="Button" parent="."]
-offset_left = 512.0
-offset_top = 480.0
-offset_right = 559.0
-offset_bottom = 511.0
+offset_left = 800.0
+offset_top = 520.0
+offset_right = 896.0
+offset_bottom = 560.0
 theme = ExtResource("4_buni1")
 text = "Pitch"
 script = ExtResource("5_t27ud")
 
-[node name="GameStatsContainer" type="VBoxContainer" parent="."]
-offset_left = 704.0
-offset_right = 1088.0
-offset_bottom = 576.0
+[node name="StatsPanel" type="Panel" parent="."]
+offset_left = 832.0
+offset_top = 8.0
+offset_right = 1136.0
+offset_bottom = 136.0
 
-[node name="AtBatLabel" type="Label" parent="GameStatsContainer"]
+[node name="GameStatsContainer" type="VBoxContainer" parent="StatsPanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 120.0
+
+[node name="AtBatLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
 text = "At Bat:"
 
-[node name="InningLabel" type="Label" parent="GameStatsContainer"]
+[node name="InningLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
 text = "Top of Inning 1"
 
-[node name="OutsLabel" type="Label" parent="GameStatsContainer"]
+[node name="OutsLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
 text = "Top of Inning 1"
 
-[node name="ScoreLabel" type="Label" parent="GameStatsContainer"]
+[node name="ScoreLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
 text = "Home: 0	 Away: 0"
