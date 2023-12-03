@@ -12,8 +12,10 @@ signal monster_moved_to_base
 @onready var third_base: Node2D = $ThirdBase
 @onready var pitcher_mound: Node2D = $PitcherMound
 @onready var dug_out: Node2D = $DugOut
+@onready var pitcher_dice_chucker: DiceChucker = $PitcherMound/PitcherDiceChucker
+@onready var batter_dice_chucker: DiceChucker = $HomeBase/BatterDiceChucker
 
-enum BasePlate { HOME = 4, AT_BAT = 0, FIRST = 1, SECOND = 2, THIRD = 3 }
+enum BasePlate { HOME = 4, AT_BAT = 0, FIRST = 1, SECOND = 2, THIRD = 3, DUG_OUT = 5 }
 
 var base_layout: Array[MonsterCharacter] = [
 	null, # AT_BAT
@@ -55,6 +57,8 @@ func _handle_strike_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
+	_move_monster_to_base(BasePlate.DUG_OUT, at_bat)
+	await monster_moved_to_base
 	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
@@ -62,6 +66,8 @@ func _handle_fly_ball(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
+	_move_monster_to_base(BasePlate.DUG_OUT, at_bat)
+	await monster_moved_to_base
 	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
@@ -69,6 +75,8 @@ func _handle_ground_ball_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
+	_move_monster_to_base(BasePlate.DUG_OUT, at_bat)
+	await monster_moved_to_base
 	emit_signal("swing_result_handled")
 	emit_signal("out", at_bat)
 
@@ -137,5 +145,7 @@ func _get_global_position_of_base_plate(base_plate: BasePlate) -> Vector2:
 			return second_base.global_position
 		BasePlate.THIRD:
 			return third_base.global_position
+		BasePlate.DUG_OUT:
+			return dug_out.global_position
 		_:
 			return home_base.global_position

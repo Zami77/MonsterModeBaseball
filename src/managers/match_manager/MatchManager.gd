@@ -10,10 +10,10 @@ signal all_monsters_in_dug_out
 
 @onready var bases_manager: BasesManager = $BasesManager
 @onready var pitch_swing_button: DefaultButton = $PitchSwingButton
-@onready var at_bat_label: Label = $GameStatsContainer/AtBatLabel
-@onready var inning_label: Label = $GameStatsContainer/InningLabel
-@onready var outs_label: Label = $GameStatsContainer/OutsLabel
-@onready var score_label: Label = $GameStatsContainer/ScoreLabel
+@onready var at_bat_label: Label = $StatsPanel/GameStatsContainer/AtBatLabel
+@onready var inning_label: Label = $StatsPanel/GameStatsContainer/InningLabel
+@onready var outs_label: Label = $StatsPanel/GameStatsContainer/OutsLabel
+@onready var score_label: Label = $StatsPanel/GameStatsContainer/ScoreLabel
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -70,9 +70,15 @@ func _get_next_pitcher() -> void:
 func _execute_swing() -> void:
 	match_state = MatchState.MID_PITCH_SWING
 	
-	var batter_roll = _roll_die()
-	var pitcher_roll = _roll_die()
+	var batter_roll = DiceRollHelper.roll_die()
+	var pitcher_roll = DiceRollHelper.roll_die()
 	print ("batter_roll: %d\tpitcher_roll: %d" % [batter_roll, pitcher_roll])
+	
+	bases_manager.pitcher_dice_chucker.chuck_dice(pitcher_roll)
+	await bases_manager.pitcher_dice_chucker.value_shown
+	
+	bases_manager.batter_dice_chucker.chuck_dice(batter_roll)
+	await bases_manager.batter_dice_chucker.value_shown
 	
 	var swing_result
 	if batter_roll >= pitcher_roll:
@@ -89,9 +95,6 @@ func _execute_swing() -> void:
 		_get_next_batter()
 	
 	match_state = MatchState.MID_MATCH
-
-func _roll_die() -> int:
-	return rng.randi_range(1, 20)
 
 func _end_match() -> void:
 	match_state = MatchState.END_MATCH
