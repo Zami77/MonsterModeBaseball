@@ -16,6 +16,9 @@ func _ready():
 	music_vol_slider.value = DataManager.game_data.settings.music_vol
 	sound_effect_slider.value = DataManager.game_data.settings.sfx_vol
 	
+	if DataManager.game_data.settings.fullscreen:
+		fullscreen_toggle.button_pressed = true
+	
 	master_vol_slider.value_changed.connect(_on_slider_value_changed.bind(SliderType.MASTER))
 	music_vol_slider.value_changed.connect(_on_slider_value_changed.bind(SliderType.MUSIC))
 	sound_effect_slider.value_changed.connect(_on_slider_value_changed.bind(SliderType.SFX))
