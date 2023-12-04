@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://gggencdkde3x"]
+[gd_scene load_steps=7 format=3 uid="uid://gggencdkde3x"]
 
 [ext_resource type="Script" path="res://src/managers/match_manager/MatchManager.gd" id="1_ccsw8"]
 [ext_resource type="PackedScene" uid="uid://ckxdks178b2gg" path="res://src/managers/match_manager/bases_manager/BasesManager.tscn" id="2_x2ck3"]
 [ext_resource type="Resource" uid="uid://ckeet5k3l2dlc" path="res://src/managers/match_manager/DefaultInning.tres" id="2_ywgey"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="4_buni1"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="5_t27ud"]
+[ext_resource type="PackedScene" uid="uid://c0716c08wvtya" path="res://src/managers/match_manager/special_card_hand_manager/SpecialCardHandManager.tscn" id="6_6d4m6"]
 
 [node name="MatchManager" type="Node2D"]
 script = ExtResource("1_ccsw8")
@@ -49,3 +50,6 @@ text = "Top of Inning 1"
 [node name="ScoreLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
 text = "Home: 0	 Away: 0"
+
+[node name="SpecialCardHandManager" parent="." instance=ExtResource("6_6d4m6")]
+position = Vector2(32, 512)

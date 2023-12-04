@@ -2,6 +2,7 @@ class_name MatchManager
 extends Node2D
 
 signal monster_moved_to_position
+signal special_card_moved_to_position
 signal all_monsters_in_dug_out
 
 @export var total_innings = 3
@@ -14,6 +15,7 @@ signal all_monsters_in_dug_out
 @onready var inning_label: Label = $StatsPanel/GameStatsContainer/InningLabel
 @onready var outs_label: Label = $StatsPanel/GameStatsContainer/OutsLabel
 @onready var score_label: Label = $StatsPanel/GameStatsContainer/ScoreLabel
+@onready var special_card_hand: SpecialCardHandManager = $SpecialCardHandManager
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -22,9 +24,16 @@ var pitcher: MonsterCharacter
 var batter: MonsterCharacter
 var match_state: MatchState = MatchState.MID_MATCH
 var rng = RandomNumberGenerator.new()
+var special_card_selected: SpecialCardWrapper = null
+var special_cards_moving: bool = false
 
 enum InningFrame { TOP, BOTTOM }
-enum MatchState { MID_MATCH, MID_PITCH_SWING, END_MATCH}
+enum MatchState { 
+	MID_MATCH = 0, 
+	MID_PITCH_SWING = 1, 
+	END_MATCH = 2,
+	BETWEEN_INNINGS = 3
+}
 
 func _ready() -> void:
 	AudioManager._fadeout_bgm()
@@ -32,6 +41,8 @@ func _ready() -> void:
 	
 	bases_manager.run_scored.connect(_on_run_scored)
 	bases_manager.out.connect(_on_out)
+	
+	special_card_hand.card_selected.connect(_on_special_card_hand_card_selected)
 	
 	rng.randomize()
 
@@ -41,9 +52,20 @@ func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	_update_stats_container()
 	_setup_inning()
 
+func _draw_special_cards() -> void:
+	for new_card_num in (special_card_hand.max_hand_size - len(special_card_hand.cards_in_hand)):
+		var new_card = SpecialCardWrapperFactory.get_random_special_card_wrapper()
+		new_card.global_position = bases_manager.dug_out.global_position
+		add_child(new_card)
+		new_card.scale = Dimensions.card_scale
+		special_card_hand.add_card_to_hand(new_card)
+
 func _setup_inning() -> void:
+	match_state = MatchState.MID_MATCH
+	special_card_selected = null
 	_get_next_batter()
 	_get_next_pitcher()
+	_draw_special_cards()
 
 func _get_next_batter() -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -53,7 +75,7 @@ func _get_next_batter() -> void:
 
 	add_child(batter)
 	batter.global_position = bases_manager.home_base.global_position
-	batter.scale = Vector2(0.5, 0.5)
+	batter.scale = Dimensions.card_scale
 	batter.monster_card.card_state = MonsterCard.CardState.BATTER
 
 func _get_next_pitcher() -> void:
@@ -80,6 +102,27 @@ func _execute_swing() -> void:
 	bases_manager.batter_dice_chucker.chuck_dice(batter_roll)
 	await bases_manager.batter_dice_chucker.value_shown
 	
+	if special_card_selected:
+		special_card_selected.special_card.play_use_card_animations()
+		
+		var batter_modifier = special_card_selected.special_card.batter_roll_modifier
+		var pitcher_modifier = special_card_selected.special_card.pitcher_roll_modifier
+		
+		if pitcher_modifier != 0:
+			pitcher_roll += pitcher_modifier
+			bases_manager.pitcher_dice_chucker.chuck_dice(pitcher_roll)
+			await bases_manager.pitcher_dice_chucker.value_shown
+		if batter_modifier != 0:
+			batter_roll += batter_modifier
+			bases_manager.batter_dice_chucker.chuck_dice(batter_roll)
+			await bases_manager.batter_dice_chucker.value_shown
+		
+		if batter_modifier == 0 and pitcher_modifier == 0:
+			await special_card_selected.special_card.card_used
+		
+		special_card_selected.queue_free()
+		special_card_selected = null
+	
 	var swing_result
 	if batter_roll >= pitcher_roll:
 		# batter advantage
@@ -102,6 +145,7 @@ func _end_match() -> void:
 	print("Away Team Score: %d" % [away_team.score])
 
 func _next_frame() -> void:
+	match_state = MatchState.BETWEEN_INNINGS
 	if inning.current_frame == InningFrame.TOP:
 		inning.current_frame = InningFrame.BOTTOM
 	elif inning.current_frame == InningFrame.BOTTOM:
@@ -126,10 +170,23 @@ func _move_monster_to_position(monster_character: MonsterCharacter, target_pos: 
 	await monster_move_tween.finished
 	emit_signal("monster_moved_to_position")
 
+func _move_special_card_to_position(special_card: SpecialCardWrapper, target_pos: Vector2) -> void:
+	var special_card_move_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
+	special_card_move_tween.tween_property(special_card, "global_position", target_pos, 0.8)
+	await special_card_move_tween.finished
+	emit_signal("special_card_moved_to_position")
+
 func _on_pitch_swing_button_pressed() -> void:
-	if match_state == MatchState.END_MATCH or match_state == MatchState.MID_PITCH_SWING:
+	if not _is_valid_pitch_swing():
 		return
+		
 	_execute_swing()
+
+func _is_valid_pitch_swing() -> bool:
+	return  (
+		match_state == MatchState.MID_MATCH or
+		special_cards_moving
+	)
 
 func _on_run_scored(monster: MonsterCharacter) -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -152,6 +209,29 @@ func _on_out(monster: MonsterCharacter) -> void:
 		_next_frame()
 	
 	_update_stats_container()
+
+func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_index: int) -> void:
+	if special_cards_moving:
+		return
+	
+	special_cards_moving = true
+	special_card_hand.remove_card_from_hand(special_card)
+	
+	if inning.current_frame == InningFrame.TOP:
+		_move_special_card_to_position(special_card, bases_manager.pitcher_special_card_position.global_position)
+	else:
+		_move_special_card_to_position(special_card, bases_manager.batter_special_card_position.global_position)
+	
+	await get_tree().create_timer(0.1).timeout # buffer to prevent soft lock
+	
+	if special_card_selected:
+		special_card_hand.add_card_to_hand(special_card_selected)
+		special_card_selected = null
+		await special_card_hand.hand_setup
+		
+	special_card_selected = special_card
+	await special_card_moved_to_position
+	special_cards_moving = false
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []
