@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0716c08wvtya"]
+
+[ext_resource type="Script" path="res://src/managers/match_manager/special_card_hand_manager/SpecialCardHandManager.gd" id="1_17fih"]
+
+[node name="SpecialCardHandManager" type="Node2D"]
+script = ExtResource("1_17fih")

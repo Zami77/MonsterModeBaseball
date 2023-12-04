@@ -24,7 +24,12 @@ var match_state: MatchState = MatchState.MID_MATCH
 var rng = RandomNumberGenerator.new()
 
 enum InningFrame { TOP, BOTTOM }
-enum MatchState { MID_MATCH, MID_PITCH_SWING, END_MATCH}
+enum MatchState { 
+	MID_MATCH = 0, 
+	MID_PITCH_SWING = 1, 
+	END_MATCH = 2,
+	BETWEEN_INNINGS = 3
+}
 
 func _ready() -> void:
 	AudioManager._fadeout_bgm()
@@ -53,7 +58,7 @@ func _get_next_batter() -> void:
 
 	add_child(batter)
 	batter.global_position = bases_manager.home_base.global_position
-	batter.scale = Vector2(0.5, 0.5)
+	batter.scale = Dimensions.card_scale
 	batter.monster_card.card_state = MonsterCard.CardState.BATTER
 
 func _get_next_pitcher() -> void:

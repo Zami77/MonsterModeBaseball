@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func chuck_dice(dice_val: int) -> void:
 	animation_player.play("chuck")
+	dice_sprite.frame = dice_val - 1
 	await animation_player.animation_finished
 	
-	dice_sprite.frame = dice_val - 1
 	emit_signal("value_shown")

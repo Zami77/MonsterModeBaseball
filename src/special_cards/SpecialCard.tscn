@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqfnubfcafrni"]
+[gd_scene load_steps=5 format=3 uid="uid://cqfnubfcafrni"]
 
 [ext_resource type="Script" path="res://src/special_cards/SpecialCard.gd" id="1_qv1ro"]
 [ext_resource type="Texture2D" uid="uid://btogk8r610ixo" path="res://src/special_cards/special_card_frame_prototype.PNG" id="2_goixa"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="3_mqog3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf00r"]
+size = Vector2(192, 256)
 
 [node name="SpecialCard" type="Node2D"]
 script = ExtResource("1_qv1ro")
@@ -22,3 +25,9 @@ offset_bottom = 224.0
 theme = ExtResource("3_mqog3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 vertical_alignment = 1
+
+[node name="SelectableArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea2D"]
+position = Vector2(96, 128)
+shape = SubResource("RectangleShape2D_pf00r")
