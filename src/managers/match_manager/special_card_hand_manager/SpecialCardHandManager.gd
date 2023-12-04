@@ -46,6 +46,7 @@ func _move_card_to_hand_position(special_card: SpecialCardWrapper, card_index: i
 
 func remove_card_from_hand(special_card: SpecialCardWrapper) -> void:
 	cards_in_hand.erase(special_card)
+	special_card.card_selected.disconnect(_on_card_selected)
 	_setup_hand()
 
 func _on_card_selected(card: SpecialCardWrapper, card_index: int) -> void:

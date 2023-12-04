@@ -17,3 +17,4 @@ func chuck_dice(dice_val: int) -> void:
 	await animation_player.animation_finished
 	
 	emit_signal("value_shown")
+

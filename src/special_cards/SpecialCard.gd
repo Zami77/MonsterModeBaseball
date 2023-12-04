@@ -2,6 +2,7 @@ class_name SpecialCard
 extends Node2D
 
 signal card_selected
+signal card_used
 
 @export var card_name: CardName
 @export var pitcher_roll_modifier: int = 0
@@ -9,6 +10,7 @@ signal card_selected
 
 @onready var card_text_label: Label = $CardTextLabel
 @onready var selectable_area: Area2D = $SelectableArea2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 enum CardName {
 	PITCHER_PLUS_TWO,
@@ -21,6 +23,14 @@ func _ready():
 	_setup_card_text()
 	
 	selectable_area.input_event.connect(_on_selectable_area_input_event)
+
+func play_use_card_animations() -> void:
+	animation_player.play("shake")
+	await animation_player.animation_finished
+	animation_player.play("disappear")
+	await animation_player.animation_finished
+	
+	emit_signal("card_used")
 
 func _setup_card_text() -> void:
 	card_text_label.text = ""

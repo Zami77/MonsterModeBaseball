@@ -61,6 +61,7 @@ func _draw_special_cards() -> void:
 		special_card_hand.add_card_to_hand(new_card)
 
 func _setup_inning() -> void:
+	match_state = MatchState.MID_MATCH
 	special_card_selected = null
 	_get_next_batter()
 	_get_next_pitcher()
@@ -101,6 +102,27 @@ func _execute_swing() -> void:
 	bases_manager.batter_dice_chucker.chuck_dice(batter_roll)
 	await bases_manager.batter_dice_chucker.value_shown
 	
+	if special_card_selected:
+		special_card_selected.special_card.play_use_card_animations()
+		
+		var batter_modifier = special_card_selected.special_card.batter_roll_modifier
+		var pitcher_modifier = special_card_selected.special_card.pitcher_roll_modifier
+		
+		if pitcher_modifier != 0:
+			pitcher_roll += pitcher_modifier
+			bases_manager.pitcher_dice_chucker.chuck_dice(pitcher_roll)
+			await bases_manager.pitcher_dice_chucker.value_shown
+		if batter_modifier != 0:
+			batter_roll += batter_modifier
+			bases_manager.batter_dice_chucker.chuck_dice(batter_roll)
+			await bases_manager.batter_dice_chucker.value_shown
+		
+		if batter_modifier == 0 and pitcher_modifier == 0:
+			await special_card_selected.special_card.card_used
+		
+		special_card_selected.queue_free()
+		special_card_selected = null
+	
 	var swing_result
 	if batter_roll >= pitcher_roll:
 		# batter advantage
@@ -123,6 +145,7 @@ func _end_match() -> void:
 	print("Away Team Score: %d" % [away_team.score])
 
 func _next_frame() -> void:
+	match_state = MatchState.BETWEEN_INNINGS
 	if inning.current_frame == InningFrame.TOP:
 		inning.current_frame = InningFrame.BOTTOM
 	elif inning.current_frame == InningFrame.BOTTOM:
@@ -154,9 +177,16 @@ func _move_special_card_to_position(special_card: SpecialCardWrapper, target_pos
 	emit_signal("special_card_moved_to_position")
 
 func _on_pitch_swing_button_pressed() -> void:
-	if match_state == MatchState.END_MATCH or match_state == MatchState.MID_PITCH_SWING or special_cards_moving:
+	if not _is_valid_pitch_swing():
 		return
+		
 	_execute_swing()
+
+func _is_valid_pitch_swing() -> bool:
+	return  (
+		match_state == MatchState.MID_MATCH or
+		special_cards_moving
+	)
 
 func _on_run_scored(monster: MonsterCharacter) -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -192,7 +222,7 @@ func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_
 	else:
 		_move_special_card_to_position(special_card, bases_manager.batter_special_card_position.global_position)
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1).timeout # buffer to prevent soft lock
 	
 	if special_card_selected:
 		special_card_hand.add_card_to_hand(special_card_selected)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqfnubfcafrni"]
+[gd_scene load_steps=8 format=3 uid="uid://cqfnubfcafrni"]
 
 [ext_resource type="Script" path="res://src/special_cards/SpecialCard.gd" id="1_qv1ro"]
 [ext_resource type="Texture2D" uid="uid://btogk8r610ixo" path="res://src/special_cards/special_card_frame_prototype.PNG" id="2_goixa"]
@@ -7,7 +7,46 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pf00r"]
 size = Vector2(192, 256)
 
+[sub_resource type="Animation" id="Animation_n4jbs"]
+resource_name = "shake"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-16, 0), Vector2(0, 0), Vector2(16, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pcpym"]
+resource_name = "disappear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b17ew"]
+_data = {
+"disappear": SubResource("Animation_pcpym"),
+"shake": SubResource("Animation_n4jbs")
+}
+
 [node name="SpecialCard" type="Node2D"]
+position = Vector2(-16, 0)
 script = ExtResource("1_qv1ro")
 
 [node name="CardFrame" type="TextureRect" parent="."]
@@ -31,3 +70,8 @@ vertical_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea2D"]
 position = Vector2(96, 128)
 shape = SubResource("RectangleShape2D_pf00r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b17ew")
+}

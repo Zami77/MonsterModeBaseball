@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm5wcc88l2b"]
+[gd_scene load_steps=7 format=3 uid="uid://dm5wcc88l2b"]
 
 [ext_resource type="Script" path="res://src/dice_chucker/DiceChucker.gd" id="1_bfij5"]
 [ext_resource type="Texture2D" uid="uid://cyvtn6d0pqqry" path="res://src/dice_chucker/dice_faces.png" id="2_xba5q"]
@@ -56,8 +56,12 @@ tracks/3/keys = {
 "values": [0.0, 4.71239, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_vnf2p"]
+resource_name = "change"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_002gp"]
 _data = {
+"change": SubResource("Animation_vnf2p"),
 "chuck": SubResource("Animation_nqmap")
 }
 

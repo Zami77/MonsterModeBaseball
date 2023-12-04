@@ -21,7 +21,7 @@ position = Vector2(464, 512)
 position = Vector2(160, 64)
 
 [node name="BatterSpecialCard" type="Node2D" parent="HomeBase"]
-position = Vector2(-80, 0)
+position = Vector2(-96, 0)
 
 [node name="FirstBase" type="Node2D" parent="."]
 position = Vector2(1056, 256)
