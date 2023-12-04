@@ -2,6 +2,7 @@ class_name MatchManager
 extends Node2D
 
 signal monster_moved_to_position
+signal special_card_moved_to_position
 signal all_monsters_in_dug_out
 
 @export var total_innings = 3
@@ -23,6 +24,8 @@ var pitcher: MonsterCharacter
 var batter: MonsterCharacter
 var match_state: MatchState = MatchState.MID_MATCH
 var rng = RandomNumberGenerator.new()
+var special_card_selected: SpecialCardWrapper = null
+var special_cards_moving: bool = false
 
 enum InningFrame { TOP, BOTTOM }
 enum MatchState { 
@@ -38,6 +41,8 @@ func _ready() -> void:
 	
 	bases_manager.run_scored.connect(_on_run_scored)
 	bases_manager.out.connect(_on_out)
+	
+	special_card_hand.card_selected.connect(_on_special_card_hand_card_selected)
 	
 	rng.randomize()
 
@@ -56,6 +61,7 @@ func _draw_special_cards() -> void:
 		special_card_hand.add_card_to_hand(new_card)
 
 func _setup_inning() -> void:
+	special_card_selected = null
 	_get_next_batter()
 	_get_next_pitcher()
 	_draw_special_cards()
@@ -141,8 +147,14 @@ func _move_monster_to_position(monster_character: MonsterCharacter, target_pos: 
 	await monster_move_tween.finished
 	emit_signal("monster_moved_to_position")
 
+func _move_special_card_to_position(special_card: SpecialCardWrapper, target_pos: Vector2) -> void:
+	var special_card_move_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
+	special_card_move_tween.tween_property(special_card, "global_position", target_pos, 0.8)
+	await special_card_move_tween.finished
+	emit_signal("special_card_moved_to_position")
+
 func _on_pitch_swing_button_pressed() -> void:
-	if match_state == MatchState.END_MATCH or match_state == MatchState.MID_PITCH_SWING:
+	if match_state == MatchState.END_MATCH or match_state == MatchState.MID_PITCH_SWING or special_cards_moving:
 		return
 	_execute_swing()
 
@@ -167,6 +179,29 @@ func _on_out(monster: MonsterCharacter) -> void:
 		_next_frame()
 	
 	_update_stats_container()
+
+func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_index: int) -> void:
+	if special_cards_moving:
+		return
+	
+	special_cards_moving = true
+	special_card_hand.remove_card_from_hand(special_card)
+	
+	if inning.current_frame == InningFrame.TOP:
+		_move_special_card_to_position(special_card, bases_manager.pitcher_special_card_position.global_position)
+	else:
+		_move_special_card_to_position(special_card, bases_manager.batter_special_card_position.global_position)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	if special_card_selected:
+		special_card_hand.add_card_to_hand(special_card_selected)
+		special_card_selected = null
+		await special_card_hand.hand_setup
+		
+	special_card_selected = special_card
+	await special_card_moved_to_position
+	special_cards_moving = false
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []
