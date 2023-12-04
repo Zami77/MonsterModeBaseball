@@ -5,7 +5,7 @@ signal card_selected
 
 @export var card_name: CardName
 @export var pitcher_roll_modifier: int = 0
-@export var batter_roll_modifier: int = -1
+@export var batter_roll_modifier: int = 0
 
 @onready var card_text_label: Label = $CardTextLabel
 @onready var selectable_area: Area2D = $SelectableArea2D

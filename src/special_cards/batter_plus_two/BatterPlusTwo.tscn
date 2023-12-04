@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj4u5e6r2t8jh"]
+
+[ext_resource type="Script" path="res://src/special_cards/SpecialCardWrapper.gd" id="1_lr5yf"]
+[ext_resource type="PackedScene" uid="uid://cqfnubfcafrni" path="res://src/special_cards/SpecialCard.tscn" id="2_ao4en"]
+
+[node name="BatterPlusTwo" type="Node2D"]
+script = ExtResource("1_lr5yf")
+
+[node name="SpecialCard" parent="." instance=ExtResource("2_ao4en")]
+card_name = 2
+batter_roll_modifier = 2

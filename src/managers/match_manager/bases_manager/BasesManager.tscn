@@ -20,6 +20,9 @@ position = Vector2(464, 512)
 [node name="BatterDiceChucker" parent="HomeBase" instance=ExtResource("3_hm2t4")]
 position = Vector2(160, 64)
 
+[node name="BatterSpecialCard" type="Node2D" parent="HomeBase"]
+position = Vector2(-80, 0)
+
 [node name="FirstBase" type="Node2D" parent="."]
 position = Vector2(1056, 256)
 
@@ -34,6 +37,9 @@ position = Vector2(544, 272)
 
 [node name="PitcherDiceChucker" parent="PitcherMound" instance=ExtResource("3_hm2t4")]
 position = Vector2(160, 48)
+
+[node name="PitcherSpecialCard" type="Node2D" parent="PitcherMound"]
+position = Vector2(-96, 0)
 
 [node name="DugOut" type="Node2D" parent="."]
 position = Vector2(-256, 544)

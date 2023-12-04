@@ -14,6 +14,8 @@ signal monster_moved_to_base
 @onready var dug_out: Node2D = $DugOut
 @onready var pitcher_dice_chucker: DiceChucker = $PitcherMound/PitcherDiceChucker
 @onready var batter_dice_chucker: DiceChucker = $HomeBase/BatterDiceChucker
+@onready var batter_special_card_position: Node2D = $HomeBase/BatterSpecialCard
+@onready var pitcher_special_card_position: Node2D = $PitcherMound/PitcherSpecialCard
 
 enum BasePlate { HOME = 4, AT_BAT = 0, FIRST = 1, SECOND = 2, THIRD = 3, DUG_OUT = 5 }
 

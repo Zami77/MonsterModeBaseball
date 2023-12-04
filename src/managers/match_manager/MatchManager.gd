@@ -14,6 +14,7 @@ signal all_monsters_in_dug_out
 @onready var inning_label: Label = $StatsPanel/GameStatsContainer/InningLabel
 @onready var outs_label: Label = $StatsPanel/GameStatsContainer/OutsLabel
 @onready var score_label: Label = $StatsPanel/GameStatsContainer/ScoreLabel
+@onready var special_card_hand: SpecialCardHandManager = $SpecialCardHandManager
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -46,9 +47,18 @@ func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	_update_stats_container()
 	_setup_inning()
 
+func _draw_special_cards() -> void:
+	for new_card_num in (special_card_hand.max_hand_size - len(special_card_hand.cards_in_hand)):
+		var new_card = SpecialCardWrapperFactory.get_random_special_card_wrapper()
+		new_card.global_position = bases_manager.dug_out.global_position
+		add_child(new_card)
+		new_card.scale = Dimensions.card_scale
+		special_card_hand.add_card_to_hand(new_card)
+
 func _setup_inning() -> void:
 	_get_next_batter()
 	_get_next_pitcher()
+	_draw_special_cards()
 
 func _get_next_batter() -> void:
 	if inning.current_frame == InningFrame.TOP:

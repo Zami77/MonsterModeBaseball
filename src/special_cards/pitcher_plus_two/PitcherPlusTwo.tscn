@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3dib17k6lsk3"]
+
+[ext_resource type="Script" path="res://src/special_cards/SpecialCardWrapper.gd" id="1_wo2h2"]
+[ext_resource type="PackedScene" uid="uid://cqfnubfcafrni" path="res://src/special_cards/SpecialCard.tscn" id="2_6g3m1"]
+
+[node name="PitcherPlusTwo" type="Node2D"]
+script = ExtResource("1_wo2h2")
+
+[node name="SpecialCard" parent="." instance=ExtResource("2_6g3m1")]
+pitcher_roll_modifier = 2
