@@ -6,9 +6,11 @@ signal special_card_moved_to_position
 signal all_monsters_in_dug_out
 signal back_to_main_menu
 
-@export var total_innings = 3
-@export var outs_per_inning = 3
+@export var total_innings: int = 3
+@export var outs_per_inning: int = 3
 @export var inning: Inning
+@export var max_monster_modes: int = 1
+@export var monster_roll_modifier: int = 10
 
 @onready var bases_manager: BasesManager = $BasesManager
 @onready var pitch_swing_button: DefaultButton = $PitchSwingButton
@@ -18,6 +20,7 @@ signal back_to_main_menu
 @onready var score_label: Label = $StatsPanel/GameStatsContainer/ScoreLabel
 @onready var special_card_hand: SpecialCardHandManager = $SpecialCardHandManager
 @onready var end_match_panel: EndMatchPanel = $EndMatchPanel
+@onready var monster_mode_button: DefaultButton = $MonsterModeButton
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -28,6 +31,17 @@ var match_state: MatchState = MatchState.MID_MATCH
 var rng = RandomNumberGenerator.new()
 var special_card_selected: SpecialCardWrapper = null
 var special_cards_moving: bool = false
+var is_monster_mode: bool = false:
+	set(value):
+		is_monster_mode = value
+		_setup_monster_mode()
+
+var times_monster_mode_used: int = 0 :
+	set(value):
+		times_monster_mode_used = value
+		
+		if times_monster_mode_used >= max_monster_modes:
+			monster_mode_button.disabled = true
 
 enum InningFrame { TOP, BOTTOM }
 enum MatchState { 
@@ -40,6 +54,7 @@ enum MatchState {
 func _ready() -> void:
 	AudioManager._fadeout_bgm()
 	pitch_swing_button.pressed.connect(_on_pitch_swing_button_pressed)
+	monster_mode_button.pressed.connect(_on_monster_mode_button_pressed)
 	
 	bases_manager.run_scored.connect(_on_run_scored)
 	bases_manager.out.connect(_on_out)
@@ -106,6 +121,15 @@ func _execute_swing() -> void:
 	
 	var batter_roll = DiceRollHelper.roll_die()
 	var pitcher_roll = DiceRollHelper.roll_die()
+	
+	if is_monster_mode:
+		if inning.current_frame == InningFrame.TOP:
+			pitcher_roll = clampi(pitcher_roll + monster_roll_modifier, 1, 20)
+		else:
+			batter_roll = clampi(batter_roll + monster_roll_modifier, 1, 20)
+		
+		times_monster_mode_used += 1
+	
 	print ("batter_roll: %d\tpitcher_roll: %d" % [batter_roll, pitcher_roll])
 	
 	bases_manager.pitcher_dice_chucker.chuck_dice(pitcher_roll)
@@ -134,7 +158,7 @@ func _execute_swing() -> void:
 		
 		special_card_selected.queue_free()
 		special_card_selected = null
-	
+			
 	var swing_result
 	if batter_roll >= pitcher_roll:
 		# batter advantage
@@ -150,6 +174,7 @@ func _execute_swing() -> void:
 		_get_next_batter()
 	
 	match_state = MatchState.MID_MATCH
+	is_monster_mode = false
 
 func _end_match() -> void:
 	match_state = MatchState.END_MATCH
@@ -257,6 +282,17 @@ func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_
 
 func _on_end_match_panel_back_to_main_menu() -> void:
 	emit_signal("back_to_main_menu")
+
+func _on_monster_mode_button_pressed() -> void:
+	is_monster_mode = !is_monster_mode
+
+func _setup_monster_mode() -> void:
+	print("Monster Mode: %s" % [is_monster_mode])
+	
+	if inning.current_frame == InningFrame.TOP:
+		pitcher.monster_card.toggle_monster_mode(is_monster_mode)
+	else:
+		batter.monster_card.toggle_monster_mode(is_monster_mode)
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []
