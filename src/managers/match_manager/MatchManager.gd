@@ -68,9 +68,16 @@ func _draw_special_cards() -> void:
 func _setup_inning() -> void:
 	match_state = MatchState.MID_MATCH
 	special_card_selected = null
+	_setup_pitch_swing_button()
 	_get_next_batter()
 	_get_next_pitcher()
 	_draw_special_cards()
+
+func _setup_pitch_swing_button() -> void:
+	if inning.current_frame == InningFrame.TOP:
+		pitch_swing_button.text = "Pitch"
+	else:
+		pitch_swing_button.text = "Swing"
 
 func _get_next_batter() -> void:
 	if inning.current_frame == InningFrame.TOP:

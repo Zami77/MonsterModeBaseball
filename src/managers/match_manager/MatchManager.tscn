@@ -56,4 +56,5 @@ text = "Home: 0	 Away: 0"
 position = Vector2(32, 512)
 
 [node name="EndMatchPanel" parent="." instance=ExtResource("7_nnlwy")]
+visible = false
 position = Vector2(352, 256)
