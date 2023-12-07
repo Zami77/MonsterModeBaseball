@@ -4,6 +4,7 @@ extends Node2D
 signal monster_moved_to_position
 signal special_card_moved_to_position
 signal all_monsters_in_dug_out
+signal back_to_main_menu
 
 @export var total_innings = 3
 @export var outs_per_inning = 3
@@ -16,6 +17,7 @@ signal all_monsters_in_dug_out
 @onready var outs_label: Label = $StatsPanel/GameStatsContainer/OutsLabel
 @onready var score_label: Label = $StatsPanel/GameStatsContainer/ScoreLabel
 @onready var special_card_hand: SpecialCardHandManager = $SpecialCardHandManager
+@onready var end_match_panel: EndMatchPanel = $EndMatchPanel
 
 # home team bats in the bottom of the inning
 var home_team: MonsterTeam
@@ -44,7 +46,10 @@ func _ready() -> void:
 	
 	special_card_hand.card_selected.connect(_on_special_card_hand_card_selected)
 	
+	end_match_panel.back_to_main_menu.connect(_on_end_match_panel_back_to_main_menu)
 	rng.randomize()
+	
+	end_match_panel.visible = false
 
 func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	home_team = _home_team
@@ -141,6 +146,14 @@ func _execute_swing() -> void:
 
 func _end_match() -> void:
 	match_state = MatchState.END_MATCH
+	
+	end_match_panel.visible = true
+	
+	if home_team.score > away_team.score:
+		end_match_panel.winning_team_label.text = "Home Team Wins!"
+	else:
+		end_match_panel.winning_team_label.text = "Away Team Wins!"
+		
 	print("Home Team Score: %d" % [home_team.score])
 	print("Away Team Score: %d" % [away_team.score])
 
@@ -157,10 +170,12 @@ func _next_frame() -> void:
 	bases_manager.handle_next_frame()
 	_move_monsters_to_dug_out()
 	await all_monsters_in_dug_out
-	_setup_inning()
 	
 	if inning.current_inning > total_innings:
 		_end_match()
+	else:
+		_setup_inning()
+	
 	
 	_update_stats_container()
 
@@ -232,6 +247,9 @@ func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_
 	special_card_selected = special_card
 	await special_card_moved_to_position
 	special_cards_moving = false
+
+func _on_end_match_panel_back_to_main_menu() -> void:
+	emit_signal("back_to_main_menu")
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []

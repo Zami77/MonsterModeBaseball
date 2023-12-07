@@ -43,6 +43,7 @@ func _load_scene(scene_path: String) -> void:
 			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM), 
 			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM)
 		)
+		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
 	
 	await transition_screen.faded_to_scene
 
