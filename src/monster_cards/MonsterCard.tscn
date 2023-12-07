@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk8sldh8eka1f"]
+[gd_scene load_steps=9 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
 [ext_resource type="Texture2D" uid="uid://dwcqg0d7ohmp8" path="res://src/monster_cards/card_frame_prototype.PNG" id="2_edprv"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_v2dwo"]
+[ext_resource type="PackedScene" uid="uid://cpujlqao62tq7" path="res://src/ui/result_card_panel/ResultCardPanel.tscn" id="4_4m5pw"]
 
 [sub_resource type="Animation" id="Animation_6ku2n"]
 resource_name = "monster_art_idle"
@@ -43,6 +44,9 @@ _data = {
 "shake": SubResource("Animation_rxbos")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdypg"]
+size = Vector2(192, 256)
+
 [node name="MonsterCard" type="Node2D"]
 script = ExtResource("1_es3ja")
 
@@ -70,3 +74,12 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_lkm7v")
 }
+
+[node name="SelectableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea"]
+position = Vector2(96, 128)
+shape = SubResource("RectangleShape2D_kdypg")
+
+[node name="ResultCardPanel" parent="." instance=ExtResource("4_4m5pw")]
+visible = false
