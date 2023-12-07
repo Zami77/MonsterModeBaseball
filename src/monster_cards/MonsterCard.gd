@@ -84,7 +84,7 @@ func evaluate_swing_result(swing_value: int) -> SwingResult:
 		result_card = pitch_result_card
 	
 	for swing_result in result_card.keys():
-		var swing_result_range = bat_result_card[swing_result]
+		var swing_result_range = result_card[swing_result]
 		var low_range = swing_result_range[0]
 		var high_range = swing_result_range[1]
 		
