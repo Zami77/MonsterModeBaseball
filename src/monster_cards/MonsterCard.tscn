@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk8sldh8eka1f"]
+[gd_scene load_steps=14 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
 [ext_resource type="Texture2D" uid="uid://dwcqg0d7ohmp8" path="res://src/monster_cards/card_frame_prototype.PNG" id="2_edprv"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_v2dwo"]
+[ext_resource type="Shader" path="res://src/monster_cards/Rainbow.gdshader" id="3_fissn"]
 [ext_resource type="PackedScene" uid="uid://cpujlqao62tq7" path="res://src/ui/result_card_panel/ResultCardPanel.tscn" id="4_4m5pw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nrnq2"]
+resource_local_to_scene = true
 
 [sub_resource type="Animation" id="Animation_6ku2n"]
 resource_name = "monster_art_idle"
@@ -47,6 +51,44 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdypg"]
 size = Vector2(192, 256)
 
+[sub_resource type="Animation" id="Animation_0uhuo"]
+resource_name = "monster_mode_on"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonsterArt:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_fissn")]
+}
+
+[sub_resource type="Animation" id="Animation_3elqv"]
+resource_name = "monster_mode_off"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonsterArt:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7k84p"]
+_data = {
+"monster_mode_off": SubResource("Animation_3elqv"),
+"monster_mode_on": SubResource("Animation_0uhuo")
+}
+
 [node name="MonsterCard" type="Node2D"]
 script = ExtResource("1_es3ja")
 
@@ -58,6 +100,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="MonsterArt" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nrnq2")
 offset_right = 192.0
 offset_bottom = 256.0
 expand_mode = 1
@@ -83,3 +126,8 @@ shape = SubResource("RectangleShape2D_kdypg")
 
 [node name="ResultCardPanel" parent="." instance=ExtResource("4_4m5pw")]
 visible = false
+
+[node name="ShaderAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7k84p")
+}

@@ -288,6 +288,11 @@ func _on_monster_mode_button_pressed() -> void:
 
 func _setup_monster_mode() -> void:
 	print("Monster Mode: %s" % [is_monster_mode])
+	
+	if inning.current_frame == InningFrame.TOP:
+		pitcher.monster_card.toggle_monster_mode(is_monster_mode)
+	else:
+		batter.monster_card.toggle_monster_mode(is_monster_mode)
 
 func _move_monsters_to_dug_out() -> void:
 	var monsters_to_remove = []

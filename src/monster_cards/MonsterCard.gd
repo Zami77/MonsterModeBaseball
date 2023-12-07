@@ -13,6 +13,7 @@ signal shook
 @onready var monster_art: TextureRect = $MonsterArt
 @onready var monster_name_label: Label = $MonsterNameLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var shader_animation_player: AnimationPlayer = $ShaderAnimationPlayer
 @onready var selectable_area: Area2D = $SelectableArea
 @onready var result_card_panel: ResultCardPanel = $ResultCardPanel
 
@@ -103,6 +104,12 @@ func evaluate_swing_result(swing_value: int) -> SwingResult:
 	
 	push_error("SwingResult not found in %s result card" % [CardState.keys()[card_state]])
 	return SwingResult.STRIKE_OUT
+
+func toggle_monster_mode(is_monster_mode: bool) -> void:
+	if is_monster_mode:
+		shader_animation_player.play("monster_mode_on")
+	else:
+		shader_animation_player.play("monster_mode_off")
 
 func _on_selectable_area_mouse_entered() -> void:
 	var result_card = bat_result_card
