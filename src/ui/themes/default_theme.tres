@@ -1,3 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://gns8b3cfwrab"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://gns8b3cfwrab"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3skot"]
+bg_color = Color(0.121569, 0.121569, 0.121569, 0.964706)
 
 [resource]
+Panel/styles/panel = SubResource("StyleBoxFlat_3skot")

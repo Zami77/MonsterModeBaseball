@@ -13,6 +13,8 @@ signal shook
 @onready var monster_art: TextureRect = $MonsterArt
 @onready var monster_name_label: Label = $MonsterNameLabel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var selectable_area: Area2D = $SelectableArea
+@onready var result_card_panel: ResultCardPanel = $ResultCardPanel
 
 var card_state: CardState = CardState.BATTER:
 	set(value):
@@ -46,6 +48,11 @@ func _ready():
 	
 	monster_art.texture = monster_texture
 	monster_name_label.text = monster_name
+	
+	selectable_area.mouse_entered.connect(_on_selectable_area_mouse_entered)
+	selectable_area.mouse_exited.connect(_on_selectable_area_mouse_exited)
+
+	result_card_panel.visible = false
 	# animation_player.play("monster_art_idle")
 	
 	_fill_result_card_dictionaries()
@@ -96,3 +103,15 @@ func evaluate_swing_result(swing_value: int) -> SwingResult:
 	
 	push_error("SwingResult not found in %s result card" % [CardState.keys()[card_state]])
 	return SwingResult.STRIKE_OUT
+
+func _on_selectable_area_mouse_entered() -> void:
+	var result_card = bat_result_card
+	
+	if card_state == CardState.PITCHER:
+		result_card = pitch_result_card
+	
+	result_card_panel.update_results_label(result_card)
+	result_card_panel.visible = true
+
+func _on_selectable_area_mouse_exited() -> void:
+	result_card_panel.visible = false
