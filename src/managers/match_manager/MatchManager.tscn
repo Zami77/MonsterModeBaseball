@@ -58,3 +58,11 @@ position = Vector2(32, 512)
 [node name="EndMatchPanel" parent="." instance=ExtResource("7_nnlwy")]
 visible = false
 position = Vector2(352, 256)
+
+[node name="MonsterModeButton" type="Button" parent="."]
+offset_left = 1024.0
+offset_top = 576.0
+offset_right = 1152.0
+offset_bottom = 640.0
+text = "Monster Mode"
+script = ExtResource("5_t27ud")
