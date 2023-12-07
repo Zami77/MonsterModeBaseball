@@ -26,4 +26,7 @@ func _get_result_to_string(result_arr: Array) -> String:
 	if result_arr[0] == -1:
 		return "-"
 	
+	if result_arr[0] == result_arr[1]:
+		return "%d" % [result_arr[0]]
+	
 	return "%d-%d" % [result_arr[0], result_arr[1]]

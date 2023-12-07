@@ -2,7 +2,6 @@ class_name DefaultButton
 extends Button
 
 func _ready():
-	pass
 	pressed.connect(_on_button_pressed)
 	mouse_entered.connect(_on_mouse_entered)
 
