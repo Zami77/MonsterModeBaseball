@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
-[ext_resource type="Texture2D" uid="uid://dwcqg0d7ohmp8" path="res://src/monster_cards/card_frame_prototype.PNG" id="2_edprv"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_v2dwo"]
+[ext_resource type="Texture2D" uid="uid://crqd3pj0nomgh" path="res://src/monster_cards/card_frame.png" id="2_vg5fe"]
 [ext_resource type="Shader" path="res://src/monster_cards/Rainbow.gdshader" id="3_fissn"]
 [ext_resource type="PackedScene" uid="uid://cpujlqao62tq7" path="res://src/ui/result_card_panel/ResultCardPanel.tscn" id="4_4m5pw"]
 
@@ -95,7 +95,7 @@ script = ExtResource("1_es3ja")
 [node name="CardFrame" type="TextureRect" parent="."]
 offset_right = 192.0
 offset_bottom = 256.0
-texture = ExtResource("2_edprv")
+texture = ExtResource("2_vg5fe")
 expand_mode = 1
 stretch_mode = 5
 
@@ -106,8 +106,9 @@ offset_bottom = 256.0
 expand_mode = 1
 
 [node name="MonsterNameLabel" type="Label" parent="."]
-offset_right = 192.0
-offset_bottom = 32.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 48.0
 theme = ExtResource("2_v2dwo")
 text = "Monster"
 horizontal_alignment = 1

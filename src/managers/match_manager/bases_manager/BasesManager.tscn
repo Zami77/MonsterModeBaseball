@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckxdks178b2gg"]
 
 [ext_resource type="Script" path="res://src/managers/match_manager/bases_manager/BasesManager.gd" id="1_hehpq"]
-[ext_resource type="Texture2D" uid="uid://f2vy64evo4y" path="res://src/managers/match_manager/bases_manager/field_extended.JPG" id="2_0v878"]
+[ext_resource type="Texture2D" uid="uid://ccip7jvju2lo3" path="res://src/managers/match_manager/bases_manager/baseball_diamond.png" id="2_8bogv"]
 [ext_resource type="PackedScene" uid="uid://dm5wcc88l2b" path="res://src/dice_chucker/DiceChucker.tscn" id="3_hm2t4"]
 
 [node name="BasesManager" type="Node2D"]
@@ -10,15 +10,15 @@ script = ExtResource("1_hehpq")
 [node name="BaseballDiamondTextureRect" type="TextureRect" parent="."]
 offset_right = 1184.0
 offset_bottom = 672.0
-texture = ExtResource("2_0v878")
+texture = ExtResource("2_8bogv")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 
 [node name="HomeBase" type="Node2D" parent="."]
 position = Vector2(464, 512)
 
 [node name="BatterDiceChucker" parent="HomeBase" instance=ExtResource("3_hm2t4")]
-position = Vector2(160, 64)
+position = Vector2(208, 64)
 
 [node name="BatterSpecialCard" type="Node2D" parent="HomeBase"]
 position = Vector2(-96, 0)
