@@ -160,7 +160,7 @@ func _execute_swing() -> void:
 		special_card_selected = null
 			
 	var swing_result
-	if batter_roll >= pitcher_roll:
+	if batter_roll > pitcher_roll:
 		# batter advantage
 		swing_result = batter.monster_card.evaluate_swing_result(batter_roll)
 	else:
