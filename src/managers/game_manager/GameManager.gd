@@ -7,6 +7,7 @@ extends Node2D
 @onready var camera: CameraManager = $CameraManager
 
 var current_scene = null
+var selected_monster_team_name: MonsterTeam.TeamName = MonsterTeam.TeamName.GOBLIN_TEAM
 
 func _ready():
 	DataManager.load_game()
@@ -38,9 +39,12 @@ func _load_scene(scene_path: String) -> void:
 	if current_scene is SettingsMenu:
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
 	
+	if current_scene is TeamSelectScreen:
+		current_scene.team_selected.connect(_on_team_selected)
+	
 	if current_scene is MatchManager:
 		current_scene.setup(
-			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM), 
+			MonsterTeamFactory.get_monster_team(selected_monster_team_name), 
 			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM)
 		)
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
@@ -50,10 +54,15 @@ func _load_scene(scene_path: String) -> void:
 func _on_back_to_main_menu() -> void:
 	_load_scene(ScenePaths.main_menu)
 
+func _on_team_selected(team_name: MonsterTeam.TeamName) -> void:
+	selected_monster_team_name = team_name
+	_load_scene(ScenePaths.match_manager)
+
 func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 	match option:
 		MainMenu.Option.PLAY_GAME:
-			_load_scene(ScenePaths.match_manager)
+			_load_scene(ScenePaths.team_select)
+			#_load_scene(ScenePaths.match_manager)
 		MainMenu.Option.SETTINGS:
 			_load_scene(ScenePaths.settings_menu)
 		MainMenu.Option.CREDITS:

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfafk1vq1i83u"]
+
+[ext_resource type="Script" path="res://src/teams/selectable_team/SelectableTeam.gd" id="1_bo7ea"]
+[ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_qqiat"]
+[ext_resource type="FontFile" uid="uid://drdie27l6fefc" path="res://src/ui/fonts/JerseyclubGrungeBold-JRXVK.otf" id="3_17cla"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="4_kuwib"]
+
+[node name="SelectableTeam" type="Node2D"]
+script = ExtResource("1_bo7ea")
+
+[node name="MonsterTeamNameLabel" type="Label" parent="."]
+offset_right = 320.0
+offset_bottom = 48.0
+theme = ExtResource("2_qqiat")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_17cla")
+theme_override_font_sizes/font_size = 40
+text = "Monster Team Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectTeamButton" type="Button" parent="."]
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 96.0
+theme = ExtResource("2_qqiat")
+text = "Select Team"
+script = ExtResource("4_kuwib")

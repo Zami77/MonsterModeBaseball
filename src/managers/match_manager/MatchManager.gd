@@ -11,6 +11,7 @@ signal back_to_main_menu
 @export var inning: Inning
 @export var max_monster_modes: int = 1
 @export var monster_roll_modifier: int = 10
+@export var player_helper_modifier: int = 3
 
 @onready var bases_manager: BasesManager = $BasesManager
 @onready var pitch_swing_button: DefaultButton = $PitchSwingButton
@@ -125,6 +126,14 @@ func _execute_swing() -> void:
 	
 	var batter_roll = DiceRollHelper.roll_die()
 	var pitcher_roll = DiceRollHelper.roll_die()
+	
+	# help player if they're losing
+	if home_team.score < away_team.score:
+		if inning.current_frame == InningFrame.TOP:
+			pitcher_roll = clampi(pitcher_roll + player_helper_modifier, 1, 20)
+		else:
+			batter_roll = clampi(batter_roll + player_helper_modifier, 1, 20)
+		
 	
 	if is_monster_mode:
 		if inning.current_frame == InningFrame.TOP:
@@ -263,7 +272,7 @@ func _on_out(monster: MonsterCharacter) -> void:
 	
 	_update_stats_container()
 
-func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, card_index: int) -> void:
+func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, _card_index: int) -> void:
 	if special_cards_moving:
 		return
 	
