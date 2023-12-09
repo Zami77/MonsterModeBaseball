@@ -1,7 +1,7 @@
 class_name MonsterTeam
 extends Resource
 
-@export var monster_characters: Array[MonsterCard.CardName]
+@export var monster_characters: Array[MonsterCard.CardName] = []
 @export var monster_team_name: TeamName
 var score: int = 0
 var current_at_bat = 0
@@ -25,7 +25,7 @@ func get_next_pitcher() -> MonsterCard.CardName:
 		current_pitcher = 0
 	return monster_card_name
 
-func get_monster_team_name_decorative() -> String:
+static func get_monster_team_name_decorative(monster_team_name: TeamName) -> String:
 	match monster_team_name:
 		TeamName.GOBLIN_TEAM:
 			return "Goblin Goons"

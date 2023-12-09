@@ -1,15 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://xhh85ivvyxph"]
+[gd_scene load_steps=4 format=3 uid="uid://xhh85ivvyxph"]
 
 [ext_resource type="Texture2D" uid="uid://ccip7jvju2lo3" path="res://src/managers/match_manager/bases_manager/baseball_diamond.png" id="1_pmsil"]
 [ext_resource type="Script" path="res://src/ui/team_select_screen/TeamSelectScreen.gd" id="1_wavl1"]
 [ext_resource type="PackedScene" uid="uid://dfafk1vq1i83u" path="res://src/teams/selectable_team/SelectableTeam.tscn" id="3_t0rio"]
-[ext_resource type="Script" path="res://src/teams/MonsterTeam.gd" id="4_jhqte"]
-
-[sub_resource type="Resource" id="Resource_x20oy"]
-resource_local_to_scene = true
-script = ExtResource("4_jhqte")
-monster_characters = Array[int]([0, 1, 0, 1])
-monster_team_name = 0
 
 [node name="TeamSelectScreen" type="Node2D"]
 script = ExtResource("1_wavl1")
@@ -29,4 +22,3 @@ offset_bottom = 400.0
 alignment = 1
 
 [node name="SelectableTeam" parent="SelectableTeamsContainer" instance=ExtResource("3_t0rio")]
-monster_team = SubResource("Resource_x20oy")

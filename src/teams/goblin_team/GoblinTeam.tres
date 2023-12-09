@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="MonsterTeam" load_steps=2 format=3 uid="uid://bcvqby25o28ur"]
+[gd_resource type="Resource" script_class="MonsterTeam" load_steps=2 format=3 uid="uid://b1oladisenlen"]
 
 [ext_resource type="Script" path="res://src/teams/MonsterTeam.gd" id="1_tas00"]
 
 [resource]
-resource_local_to_scene = true
 script = ExtResource("1_tas00")
 monster_characters = Array[int]([0, 1, 0, 1])
 monster_team_name = 0

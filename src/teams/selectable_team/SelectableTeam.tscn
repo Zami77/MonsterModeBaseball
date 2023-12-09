@@ -1,14 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfafk1vq1i83u"]
+[gd_scene load_steps=5 format=3 uid="uid://dfafk1vq1i83u"]
 
 [ext_resource type="Script" path="res://src/teams/selectable_team/SelectableTeam.gd" id="1_bo7ea"]
-[ext_resource type="Resource" uid="uid://bcvqby25o28ur" path="res://src/teams/goblin_team/GoblinTeam.tres" id="2_jp4rg"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_qqiat"]
 [ext_resource type="FontFile" uid="uid://drdie27l6fefc" path="res://src/ui/fonts/JerseyclubGrungeBold-JRXVK.otf" id="3_17cla"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="4_kuwib"]
 
 [node name="SelectableTeam" type="Node2D"]
 script = ExtResource("1_bo7ea")
-monster_team = ExtResource("2_jp4rg")
 
 [node name="MonsterTeamNameLabel" type="Label" parent="."]
 offset_right = 320.0

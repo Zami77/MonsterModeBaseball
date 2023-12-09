@@ -11,5 +11,5 @@ func _ready():
 			child.team_selected.connect(_on_team_selected)
 
 
-func _on_team_selected(monster_team: MonsterTeam) -> void:
+func _on_team_selected(monster_team: MonsterTeam.TeamName) -> void:
 	emit_signal("team_selected", monster_team)
