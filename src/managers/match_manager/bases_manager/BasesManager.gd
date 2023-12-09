@@ -61,6 +61,15 @@ func handle_swing_result(swing_result: MonsterCard.SwingResult, at_bat: MonsterC
 func _handle_strike_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
 	
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_catch_ball()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_strike_out()
+	await get_tree().create_timer(0.1).timeout
+	
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
 	_move_monster_to_base(BasePlate.DUG_OUT, at_bat)
@@ -69,6 +78,15 @@ func _handle_strike_out(at_bat: MonsterCharacter) -> void:
 	emit_signal("out", at_bat)
 
 func _handle_fly_ball(at_bat: MonsterCharacter) -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_catch_ball()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_out()
+	await get_tree().create_timer(0.1).timeout
+	
 	base_layout[BasePlate.AT_BAT] = null
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
@@ -78,6 +96,15 @@ func _handle_fly_ball(at_bat: MonsterCharacter) -> void:
 	emit_signal("out", at_bat)
 
 func _handle_ground_ball_out(at_bat: MonsterCharacter) -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_catch_ball()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_out()
+	await get_tree().create_timer(0.1).timeout
+	
 	base_layout[BasePlate.AT_BAT] = null
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
@@ -87,6 +114,15 @@ func _handle_ground_ball_out(at_bat: MonsterCharacter) -> void:
 	emit_signal("out", at_bat)
 
 func _handle_single() -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_ball_hit()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_safe()
+	await get_tree().create_timer(0.1).timeout
+	
 	for base_plate in BasePlate.FIRST:
 		monsters_to_await = 0
 		_advance_base(base_plate)
@@ -95,6 +131,15 @@ func _handle_single() -> void:
 	emit_signal("swing_result_handled")
 
 func _handle_double() -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_ball_hit()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_safe()
+	await get_tree().create_timer(0.1).timeout
+	
 	for base_plate in BasePlate.SECOND:
 		monsters_to_await = 0
 		_advance_base(base_plate)
@@ -103,6 +148,15 @@ func _handle_double() -> void:
 	emit_signal("swing_result_handled")
 
 func _handle_triple() -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_ball_hit()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_safe()
+	await get_tree().create_timer(0.1).timeout
+	
 	for base_plate in BasePlate.THIRD:
 		monsters_to_await = 0
 		_advance_base(base_plate)
@@ -111,6 +165,15 @@ func _handle_triple() -> void:
 	emit_signal("swing_result_handled")
 
 func _handle_home_run() -> void:
+	AudioManager.play_bat_swing()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_ball_hit()
+	await get_tree().create_timer(0.1).timeout
+	
+	AudioManager.play_umpire_safe()
+	await get_tree().create_timer(0.1).timeout
+	
 	for base_plate in BasePlate.HOME:
 		monsters_to_await = 0
 		_advance_base(base_plate)
@@ -131,6 +194,7 @@ func _advance_base(current_base: BasePlate) -> void:
 		_advance_base(current_base + 1)
 	monsters_to_await += 1
 	_move_monster_to_base(current_base + 1, monster_on_base)
+	AudioManager.play_running_base()
 	base_layout[current_base] = null
 	base_layout[current_base + 1] = monster_on_base
 
