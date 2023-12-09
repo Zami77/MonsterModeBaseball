@@ -1,25 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://q75teokjs3xd"]
+[gd_scene load_steps=6 format=3 uid="uid://q75teokjs3xd"]
 
 [ext_resource type="Script" path="res://src/ui/main_menu/MainMenu.gd" id="1_o5udl"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="1_ry7bh"]
+[ext_resource type="Texture2D" uid="uid://ccip7jvju2lo3" path="res://src/managers/match_manager/bases_manager/baseball_diamond.png" id="2_8dibd"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="2_drprm"]
+[ext_resource type="FontFile" uid="uid://drdie27l6fefc" path="res://src/ui/fonts/JerseyclubGrungeBold-JRXVK.otf" id="4_ud138"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_o5udl")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BaseballDiamondTextureRect" type="TextureRect" parent="."]
 offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0, 0, 0, 1)
+offset_bottom = 656.0
+texture = ExtResource("2_8dibd")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="TitleLabel" type="Label" parent="."]
-offset_left = 256.0
+offset_left = 128.0
 offset_top = 128.0
-offset_right = 896.0
+offset_right = 1024.0
 offset_bottom = 256.0
 theme = ExtResource("1_ry7bh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_outline_size = 9
+theme_override_fonts/font = ExtResource("4_ud138")
 theme_override_font_sizes/font_size = 64
-text = "Game Name"
+text = "Monster Mode Baseball"
 horizontal_alignment = 1
 vertical_alignment = 1
 

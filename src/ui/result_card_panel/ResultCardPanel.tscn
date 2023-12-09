@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpujlqao62tq7"]
+[gd_scene load_steps=4 format=3 uid="uid://cpujlqao62tq7"]
 
 [ext_resource type="Script" path="res://src/ui/result_card_panel/ResultCardPanel.gd" id="1_nc7i0"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_emjlc"]
+[ext_resource type="FontFile" uid="uid://drdie27l6fefc" path="res://src/ui/fonts/JerseyclubGrungeBold-JRXVK.otf" id="3_jep6l"]
 
 [node name="ResultCardPanel" type="Node2D"]
 script = ExtResource("1_nc7i0")
@@ -18,4 +19,7 @@ offset_bottom = 256.0
 
 [node name="ResultsLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_emjlc")
+theme_override_fonts/font = ExtResource("3_jep6l")
+theme_override_font_sizes/font_size = 28
 autowrap_mode = 2

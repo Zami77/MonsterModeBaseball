@@ -117,7 +117,7 @@ func _get_next_pitcher() -> void:
 
 	add_child(pitcher)
 	pitcher.global_position = bases_manager.pitcher_mound.global_position
-	pitcher.scale = Vector2(0.5, 0.5)
+	pitcher.scale = Dimensions.card_scale
 	pitcher.monster_card.card_state = MonsterCard.CardState.PITCHER
 
 func _execute_swing() -> void:

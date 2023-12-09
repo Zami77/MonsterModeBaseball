@@ -15,10 +15,10 @@ inning = ExtResource("2_ywgey")
 [node name="BasesManager" parent="." instance=ExtResource("2_x2ck3")]
 
 [node name="PitchSwingButton" type="Button" parent="."]
-offset_left = 800.0
-offset_top = 520.0
-offset_right = 896.0
-offset_bottom = 560.0
+offset_left = 768.0
+offset_top = 512.0
+offset_right = 928.0
+offset_bottom = 576.0
 theme = ExtResource("4_buni1")
 text = "Pitch"
 script = ExtResource("5_t27ud")
@@ -53,16 +53,17 @@ layout_mode = 2
 text = "Home: 0	 Away: 0"
 
 [node name="SpecialCardHandManager" parent="." instance=ExtResource("6_6d4m6")]
-position = Vector2(32, 512)
+position = Vector2(16, 512)
 
 [node name="EndMatchPanel" parent="." instance=ExtResource("7_nnlwy")]
 visible = false
 position = Vector2(352, 256)
 
 [node name="MonsterModeButton" type="Button" parent="."]
-offset_left = 1024.0
+offset_left = 992.0
 offset_top = 576.0
-offset_right = 1152.0
+offset_right = 1151.0
 offset_bottom = 640.0
+theme = ExtResource("4_buni1")
 text = "Monster Mode"
 script = ExtResource("5_t27ud")

@@ -10,7 +10,7 @@
 script = ExtResource("1_sw4o8")
 
 [node name="MonsterCard" parent="." instance=ExtResource("2_7546v")]
-monster_name = "Slaks Slugger"
+monster_name = "Slaks"
 monster_texture = ExtResource("3_0ko07")
 pitch_result_card_resource = ExtResource("4_ee2wo")
 bat_result_card_resource = ExtResource("5_eo6tf")

@@ -6,8 +6,8 @@ extends Node2D
 func update_results_label(result_card: Dictionary) -> void:
 	results_label.text = (
 		"Strike Out: %s\n" +
-		"Fly Ball Out: %s\n" +
-		"Ground Ball Out: %s\n" +
+		"Fly Out: %s\n" +
+		"Ground Out: %s\n" +
 		"Single: %s\n" +
 		"Double: %s\n" +
 		"Triple: %s\n" +

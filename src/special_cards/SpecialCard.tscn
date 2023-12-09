@@ -63,6 +63,7 @@ offset_right = 160.0
 offset_bottom = 224.0
 theme = ExtResource("3_mqog3")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
 vertical_alignment = 1
 
 [node name="SelectableArea2D" type="Area2D" parent="."]
