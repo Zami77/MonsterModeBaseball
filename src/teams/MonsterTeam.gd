@@ -24,3 +24,10 @@ func get_next_pitcher() -> MonsterCard.CardName:
 	if current_pitcher >= len(monster_characters):
 		current_pitcher = 0
 	return monster_card_name
+
+func get_monster_team_name_decorative() -> String:
+	match monster_team_name:
+		TeamName.GOBLIN_TEAM:
+			return "Goblin Goons"
+		_:
+			return "Goblin Goons"
