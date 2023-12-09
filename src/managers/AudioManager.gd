@@ -14,7 +14,7 @@ var sfx_queue = []
 
 var rng = RandomNumberGenerator.new()
 
-var button_press = "res://src/ui/default_button/FA_Confirm_Button_1_1.wav"
+var button_press = "res://src/ui/default_button/Click Plastic.wav"
 var button_hover = "res://src/ui/default_button/button_hover.wav"
 
 var main_menu_songs = [

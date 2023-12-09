@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bkkh08bujd27v"
+path="res://.godot/imported/Click Plastic.wav-df9166bdfcdb1b67f5f75b77d23f7d24.sample"
+
+[deps]
+
+source_file="res://src/ui/default_button/Click Plastic.wav"
+dest_files=["res://.godot/imported/Click Plastic.wav-df9166bdfcdb1b67f5f75b77d23f7d24.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
