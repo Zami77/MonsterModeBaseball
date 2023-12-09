@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://l3rd1kvsvcbw"
+path="res://.godot/imported/Running Bases_4.wav-44c74ec51cdc1e32f3d1d5d59e4b5fb1.sample"
+
+[deps]
+
+source_file="res://src/common/sfx/running_bases/Running Bases_4.wav"
+dest_files=["res://.godot/imported/Running Bases_4.wav-44c74ec51cdc1e32f3d1d5d59e4b5fb1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

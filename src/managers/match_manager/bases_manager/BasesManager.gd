@@ -39,6 +39,9 @@ func handle_next_frame() -> void:
 
 func handle_swing_result(swing_result: MonsterCard.SwingResult, at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = at_bat
+	AudioManager.play_throw_ball()
+	await get_tree().create_timer(0.1).timeout
+	
 	match swing_result:
 		MonsterCard.SwingResult.STRIKE_OUT:
 			_handle_strike_out(at_bat)
@@ -57,6 +60,7 @@ func handle_swing_result(swing_result: MonsterCard.SwingResult, at_bat: MonsterC
 
 func _handle_strike_out(at_bat: MonsterCharacter) -> void:
 	base_layout[BasePlate.AT_BAT] = null
+	
 	at_bat.monster_card.shake()
 	await at_bat.monster_card.shook
 	_move_monster_to_base(BasePlate.DUG_OUT, at_bat)

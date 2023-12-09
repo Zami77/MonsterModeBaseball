@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://qjwgi84f6crl"
+path="res://.godot/imported/Crowd Ambience_1.wav-c6bf7f196e71cdf54dddbc3d797d6c69.sample"
+
+[deps]
+
+source_file="res://src/common/sfx/crowd_ambience/Crowd Ambience_1.wav"
+dest_files=["res://.godot/imported/Crowd Ambience_1.wav-c6bf7f196e71cdf54dddbc3d797d6c69.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
