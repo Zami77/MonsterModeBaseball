@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bmfy1btdcg53y"
+path="res://.godot/imported/Throw Ball_3.wav-bcc2536e4764c56e5bf3e21e936cc5df.sample"
+
+[deps]
+
+source_file="res://src/common/sfx/throw_ball/Throw Ball_3.wav"
+dest_files=["res://.godot/imported/Throw Ball_3.wav-bcc2536e4764c56e5bf3e21e936cc5df.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

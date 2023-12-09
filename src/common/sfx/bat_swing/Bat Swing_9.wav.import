@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dy0ae4dvasleb"
+path="res://.godot/imported/Bat Swing_9.wav-d02261873f4feb92d38a47cf323735c6.sample"
+
+[deps]
+
+source_file="res://src/common/sfx/bat_swing/Bat Swing_9.wav"
+dest_files=["res://.godot/imported/Bat Swing_9.wav-d02261873f4feb92d38a47cf323735c6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

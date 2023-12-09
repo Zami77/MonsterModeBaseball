@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://de06dstgtk1ab"
+path="res://.godot/imported/Catch Ball_6.wav-9968e05ee93345b1001202dd52cb74c2.sample"
+
+[deps]
+
+source_file="res://src/common/sfx/catch_ball/Catch Ball_6.wav"
+dest_files=["res://.godot/imported/Catch Ball_6.wav-9968e05ee93345b1001202dd52cb74c2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

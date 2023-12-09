@@ -53,6 +53,8 @@ enum MatchState {
 
 func _ready() -> void:
 	AudioManager._fadeout_bgm()
+	AudioManager.play_match_theme()
+	
 	pitch_swing_button.pressed.connect(_on_pitch_swing_button_pressed)
 	monster_mode_button.pressed.connect(_on_monster_mode_button_pressed)
 	
@@ -87,6 +89,8 @@ func _setup_inning() -> void:
 	_get_next_batter()
 	_get_next_pitcher()
 	_draw_special_cards()
+	
+	AudioManager.play_umpire_play_ball()
 
 func _setup_pitch_swing_button() -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -237,8 +241,10 @@ func _is_valid_pitch_swing() -> bool:
 
 func _on_run_scored(monster: MonsterCharacter) -> void:
 	if inning.current_frame == InningFrame.TOP:
+		AudioManager.play_crowd_boo()
 		away_team.score += 1
 	elif inning.current_frame == InningFrame.BOTTOM:
+		AudioManager.play_crowd_cheer()
 		home_team.score += 1
 	
 	_update_stats_container()

@@ -19,8 +19,8 @@ func load_game() -> void:
 			'settings': {
 				'fullscreen': false,
 				'master_vol': 0.7,
-				'music_vol': 0.7,
-				'sfx_vol': 0.7
+				'music_vol': 0.5,
+				'sfx_vol': 0.8
 			}
 		}
 		return
