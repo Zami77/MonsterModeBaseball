@@ -19,8 +19,11 @@ func load_game() -> void:
 			'settings': {
 				'fullscreen': false,
 				'master_vol': 0.7,
-				'music_vol': 0.5,
+				'music_vol': 0.45,
 				'sfx_vol': 0.8
+			},
+			'persistent_data': {
+				'tutorial_seen': false
 			}
 		}
 		return
@@ -31,7 +34,7 @@ func load_game() -> void:
 	if not save_file_text:
 		return
 	
-	var save_data_json = JSON.parse_string(save_file_text)
+	var save_data_json: Dictionary = JSON.parse_string(save_file_text)
 	
 	if not save_data_json:
 		push_error("save_data was null")

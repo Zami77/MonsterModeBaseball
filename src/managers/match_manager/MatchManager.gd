@@ -49,7 +49,8 @@ enum MatchState {
 	MID_MATCH = 0, 
 	MID_PITCH_SWING = 1, 
 	END_MATCH = 2,
-	BETWEEN_INNINGS = 3
+	BETWEEN_INNINGS = 3,
+	PRE_MATCH = 4
 }
 
 func _ready() -> void:
@@ -74,6 +75,16 @@ func setup(_home_team: MonsterTeam, _away_team: MonsterTeam) -> void:
 	away_team = _away_team
 	_update_stats_container()
 	_setup_inning()
+	
+	if not DataManager.game_data.persistent_data.tutorial_seen:
+		_tutorial_dialog()
+		DataManager.game_data.persistent_data.tutorial_seen = true
+
+func _tutorial_dialog() -> void:
+	match_state = MatchState.PRE_MATCH
+	DialogueManager.show_dialogue_balloon(load("res://src/dialog/tutorial/tutorial.dialogue"))
+	await DialogueManager.dialogue_ended
+	match_state = MatchState.MID_MATCH
 
 func _draw_special_cards() -> void:
 	for new_card_num in (special_card_hand.max_hand_size - len(special_card_hand.cards_in_hand)):
