@@ -14,6 +14,7 @@ func _ready() -> void:
 func chuck_dice(dice_val: int) -> void:
 	dice_val = clampi(dice_val, 1, 20)
 	animation_player.play("chuck")
+	AudioManager.play_dice_roll()
 	dice_sprite.frame = dice_val - 1
 	await animation_player.animation_finished
 	

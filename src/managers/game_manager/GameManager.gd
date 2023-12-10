@@ -35,6 +35,9 @@ func _load_scene(scene_path: String) -> void:
 	
 	if current_scene is CreditsScreen:
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
+	
+	if current_scene is InstructionsScreen:
+		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
 		
 	if current_scene is SettingsMenu:
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
@@ -62,9 +65,10 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 	match option:
 		MainMenu.Option.PLAY_GAME:
 			_load_scene(ScenePaths.team_select)
-			#_load_scene(ScenePaths.match_manager)
 		MainMenu.Option.SETTINGS:
 			_load_scene(ScenePaths.settings_menu)
+		MainMenu.Option.INSTRUCTIONS:
+			_load_scene(ScenePaths.instructions_screen)
 		MainMenu.Option.CREDITS:
 			_load_scene(ScenePaths.credits_screen)
 		MainMenu.Option.EXIT_GAME:

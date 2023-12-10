@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg82mojvi5bqv"]
+
+[ext_resource type="Script" path="res://src/ui/instructions_screen/InstructionsScreen.gd" id="1_5es1c"]
+[ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_2hghx"]
+[ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="2_hucfj"]
+
+[node name="InstructionsScreen" type="Node2D"]
+script = ExtResource("1_5es1c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="InstructionsLabel" type="Label" parent="."]
+offset_left = 128.0
+offset_right = 1024.0
+offset_bottom = 128.0
+theme = ExtResource("2_2hghx")
+theme_override_font_sizes/font_size = 48
+text = "Instructions"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionsText" type="RichTextLabel" parent="."]
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 1088.0
+offset_bottom = 512.0
+theme = ExtResource("2_2hghx")
+text = "Welcome to Monster Mode Baseball, A Baseball card game where monsters duke it out on the diamond!
+
+Just like in normal baseball, you take turns between being at bat and pitching. You're the home team and can always tell what players are yours by the floating cards.
+
+Press the Pitch button to pitch (This will switch to a Swing button when you're at bat).
+
+A die will then be rolled for the pitcher and the batter. Whoever has the highest roll gets advantage and the batter's die roll will be compared to whoever has the advantage.
+
+Hover over a card to see the Swing Result table.
+
+You can affect the outcome of the die roll with the special cards in the bottom left corner of the screen.
+
+Each inning frame you will draw up to 3 cards, so make sure to use as many cards as possible each frame.
+
+You can also activate Monster Mode, once per game. This will give a large boost to your die roll. Save this for when you really need it!
+
+Good luck and Play Ball!"
+
+[node name="MainMenuButton" type="Button" parent="."]
+offset_left = 480.0
+offset_top = 544.0
+offset_right = 672.0
+offset_bottom = 608.0
+theme = ExtResource("2_2hghx")
+text = "Main Menu"
+script = ExtResource("2_hucfj")

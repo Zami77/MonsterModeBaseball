@@ -1,0 +1,21 @@
+~ match_tutorial
+
+Welcome to Monster Mode Baseball, A Baseball card game where monsters duke it out on the diamond!
+
+Just like in normal baseball, you take turns between being at bat and pitching. You're the home team and can always tell what players are yours by the floating cards.
+
+Press the Pitch button to pitch (This will switch to a Swing button when you're at bat).
+
+A die will then be rolled for the pitcher and the batter. Whoever has the highest roll gets advantage and the batter's die roll will be compared to whoever has the advantage.
+
+Hover over a card to see the Swing Result table.
+
+You can affect the outcome of the die roll with the special cards in the bottom left corner of the screen.
+
+Each inning frame you will draw up to 3 cards, so make sure to use as many cards as possible each frame.
+
+You can also activate Monster Mode, once per game. This will give a large boost to your die roll. Save this for when you really need it!
+
+Good luck and Play Ball!
+
+=> END
