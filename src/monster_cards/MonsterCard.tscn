@@ -106,10 +106,11 @@ offset_bottom = 256.0
 expand_mode = 1
 
 [node name="MonsterNameLabel" type="Label" parent="."]
-offset_top = 16.0
+offset_top = 8.0
 offset_right = 128.0
-offset_bottom = 48.0
+offset_bottom = 47.0
 theme = ExtResource("2_v2dwo")
+theme_override_font_sizes/font_size = 32
 text = "Monster"
 horizontal_alignment = 1
 vertical_alignment = 1

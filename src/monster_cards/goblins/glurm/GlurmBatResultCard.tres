@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_y30xj")
-strike_out_range = Array[int]([1, 5])
-fly_ball_range = Array[int]([6, 9])
-ground_ball_out_range = Array[int]([10, 12])
-single_range = Array[int]([13, 18])
-double_range = Array[int]([19, 19])
+strike_out_range = Array[int]([1, 2])
+fly_ball_range = Array[int]([3, 4])
+ground_ball_out_range = Array[int]([5, 5])
+single_range = Array[int]([6, 17])
+double_range = Array[int]([18, 19])
 triple_range = Array[int]([20, 20])
 home_run_range = Array[int]([-1, -1])

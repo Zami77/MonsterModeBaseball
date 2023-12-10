@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4apwj6onh7vv"]
+
+[ext_resource type="Script" path="res://src/monster_cards/MonsterCharacter.gd" id="1_cbd67"]
+[ext_resource type="PackedScene" uid="uid://bk8sldh8eka1f" path="res://src/monster_cards/MonsterCard.tscn" id="2_pamxb"]
+[ext_resource type="Texture2D" uid="uid://ui4ajqlg6u1a" path="res://src/monster_cards/goblins/zeeg/zeeg.png" id="3_ooq45"]
+[ext_resource type="Resource" uid="uid://c3ex2ygynwqi8" path="res://src/monster_cards/goblins/zeeg/ZeegPitchResultCard.tres" id="4_o38sn"]
+[ext_resource type="Resource" uid="uid://c26lssf4a4ff1" path="res://src/monster_cards/goblins/zeeg/ZeegBatResultCard.tres" id="5_5r3ba"]
+
+[node name="Zeeg" type="Node2D"]
+script = ExtResource("1_cbd67")
+
+[node name="MonsterCard" parent="." instance=ExtResource("2_pamxb")]
+monster_name = "Zeeg"
+monster_texture = ExtResource("3_ooq45")
+pitch_result_card_resource = ExtResource("4_o38sn")
+bat_result_card_resource = ExtResource("5_5r3ba")

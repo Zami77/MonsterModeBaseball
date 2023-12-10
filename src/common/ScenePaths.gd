@@ -9,6 +9,8 @@ static var team_select = "res://src/ui/team_select_screen/TeamSelectScreen.tscn"
 
 static var slaks_slugger_packed_scene = preload("res://src/monster_cards/goblins/slaks_slugger/SlaksSlugger.tscn")
 static var glurm_packed_scene = preload("res://src/monster_cards/goblins/glurm/Glurm.tscn")
+static var zeeg_packed_scene = preload("res://src/monster_cards/goblins/zeeg/Zeeg.tscn")
+static var ploog_packed_scene = preload("res://src/monster_cards/goblins/ploog/Ploog.tscn")
 
 static var batter_plus_one_pitcher_minus_one_packed_scene = preload("res://src/special_cards/batter_plus_one_pitcher_minus_one/BatterPlusOnePitcherMinusOne.tscn")
 static var batter_plus_two_packed_scene = preload("res://src/special_cards/batter_plus_two/BatterPlusTwo.tscn")
