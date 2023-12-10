@@ -21,9 +21,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"transitions": PackedFloat32Array(1, 2.92817, 0.482968, 5.65685, 0.406126),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-4, -8), Vector2(0, 0), Vector2(4, 8), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0), Vector2(0, 4), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_rxbos"]

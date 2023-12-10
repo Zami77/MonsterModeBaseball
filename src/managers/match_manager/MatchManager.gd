@@ -110,8 +110,8 @@ func _get_next_batter() -> void:
 	batter.scale = Dimensions.card_scale
 	batter.monster_card.card_state = MonsterCard.CardState.BATTER
 	
-#	if inning.current_frame == InningFrame.BOTTOM:
-#		batter.monster_card.play_idle_animation()
+	if inning.current_frame == InningFrame.BOTTOM:
+		batter.monster_card.play_idle_animation()
 
 func _get_next_pitcher() -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -124,8 +124,8 @@ func _get_next_pitcher() -> void:
 	pitcher.scale = Dimensions.card_scale
 	pitcher.monster_card.card_state = MonsterCard.CardState.PITCHER
 	
-#	if inning.current_frame == InningFrame.TOP:
-#		pitcher.monster_card.play_idle_animation()
+	if inning.current_frame == InningFrame.TOP:
+		pitcher.monster_card.play_idle_animation()
 
 func _execute_swing() -> void:
 	match_state = MatchState.MID_PITCH_SWING

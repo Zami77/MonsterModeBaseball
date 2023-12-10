@@ -123,7 +123,7 @@ func _on_selectable_area_mouse_entered() -> void:
 	result_card_panel.visible = true
 
 func play_idle_animation() -> void:
-	animation_player.play("card_idle")
+	animation_player.play("monster_art_idle")
 
 func stop_animation() -> void:
 	animation_player.stop()
