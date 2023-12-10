@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d01novt0hh55f"]
+[gd_scene load_steps=4 format=3 uid="uid://d01novt0hh55f"]
 
 [ext_resource type="Script" path="res://src/ui/end_match_panel/EndMatchPanel.gd" id="1_0qpbr"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="1_y4pxu"]
+[ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_f3b7f"]
 
 [node name="EndMatchPanel" type="Node2D"]
 script = ExtResource("1_0qpbr")
@@ -9,6 +10,7 @@ script = ExtResource("1_0qpbr")
 [node name="Panel" type="Panel" parent="."]
 offset_right = 512.0
 offset_bottom = 160.0
+theme = ExtResource("2_f3b7f")
 
 [node name="PanelContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0

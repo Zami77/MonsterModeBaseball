@@ -17,3 +17,5 @@ Label/colors/font_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 28
 Label/fonts/font = ExtResource("2_1o8td")
 Panel/styles/panel = SubResource("StyleBoxFlat_3skot")
+RichTextLabel/font_sizes/normal_font_size = 38
+RichTextLabel/fonts/normal_font = ExtResource("2_1o8td")

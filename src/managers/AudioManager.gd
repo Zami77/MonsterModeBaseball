@@ -136,6 +136,8 @@ var umpire_play_ball_sfx = "res://src/common/sfx/umpire/Umpire_2.wav"
 var umpire_out_sfx = "res://src/common/sfx/umpire/Umpire_1.wav"
 var umpire_safe_sfx = "res://src/common/sfx/umpire/Umpire_8.wav"
 
+var dice_roll_sfx = "res://src/dice_chucker/Roll 1d20.wav"
+
 func _ready():
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
@@ -236,6 +238,9 @@ func play_umpire_out() -> void:
 func play_umpire_play_ball() -> void:
 	play_sfx(umpire_play_ball_sfx)
 
+func play_dice_roll() -> void:
+	play_sfx(dice_roll_sfx)
+	
 func _fill_bags() -> void:
 	if not main_menu_bag:
 		main_menu_bag = main_menu_songs.duplicate()

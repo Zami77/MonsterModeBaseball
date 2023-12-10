@@ -24,7 +24,8 @@ func load_game() -> void:
 			},
 			'persistent_data': {
 				'tutorial_seen': false
-			}
+			},
+			'completed_matches': []
 		}
 		return
 	
@@ -41,4 +42,11 @@ func load_game() -> void:
 		return
 	
 	game_data = save_data_json
+
+func add_completed_match(completed_match):
+	if not game_data.has('completed_matches'):
+		game_data['completed_matches'] = []
 	
+	game_data.completed_matches.append(completed_match)
+	
+	save_game()

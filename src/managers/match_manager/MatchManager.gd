@@ -12,6 +12,8 @@ signal back_to_main_menu
 @export var max_monster_modes: int = 1
 @export var monster_roll_modifier: int = 10
 @export var player_helper_modifier: int = 3
+@export var enemy_helper_modifier: int = 3
+@export var enemy_score_gap: int = 2
 
 @onready var bases_manager: BasesManager = $BasesManager
 @onready var pitch_swing_button: DefaultButton = $PitchSwingButton
@@ -150,7 +152,14 @@ func _execute_swing() -> void:
 			pitcher_roll = clampi(pitcher_roll + player_helper_modifier, 1, 20)
 		else:
 			batter_roll = clampi(batter_roll + player_helper_modifier, 1, 20)
-		
+	
+	# help enemy if they're losing by a large gap
+	if (home_team.score - away_team.score) >= enemy_score_gap:
+		if inning.current_frame == InningFrame.TOP:
+			batter_roll = clampi(batter_roll + enemy_helper_modifier, 1, 20)
+		else:
+			pitcher_roll = clampi(pitcher_roll + enemy_helper_modifier, 1, 20)
+	
 	
 	if is_monster_mode:
 		if inning.current_frame == InningFrame.TOP:
@@ -218,6 +227,15 @@ func _end_match() -> void:
 		
 	print("Home Team Score: %d" % [home_team.score])
 	print("Away Team Score: %d" % [away_team.score])
+	
+	DataManager.add_completed_match(
+		{
+			'home_team': home_team.monster_team_name,
+			'home_team_score': home_team.score,
+			'away_team': away_team.monster_team_name,
+			'away_team_score': away_team.score
+		}
+	)
 
 func _next_frame() -> void:
 	match_state = MatchState.BETWEEN_INNINGS
