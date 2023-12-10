@@ -109,6 +109,9 @@ func _get_next_batter() -> void:
 	batter.global_position = bases_manager.home_base.global_position
 	batter.scale = Dimensions.card_scale
 	batter.monster_card.card_state = MonsterCard.CardState.BATTER
+	
+#	if inning.current_frame == InningFrame.BOTTOM:
+#		batter.monster_card.play_idle_animation()
 
 func _get_next_pitcher() -> void:
 	if inning.current_frame == InningFrame.TOP:
@@ -120,6 +123,9 @@ func _get_next_pitcher() -> void:
 	pitcher.global_position = bases_manager.pitcher_mound.global_position
 	pitcher.scale = Dimensions.card_scale
 	pitcher.monster_card.card_state = MonsterCard.CardState.PITCHER
+	
+#	if inning.current_frame == InningFrame.TOP:
+#		pitcher.monster_card.play_idle_animation()
 
 func _execute_swing() -> void:
 	match_state = MatchState.MID_PITCH_SWING

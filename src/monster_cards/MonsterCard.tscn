@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk8sldh8eka1f"]
+[gd_scene load_steps=15 format=3 uid="uid://bk8sldh8eka1f"]
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCard.gd" id="1_es3ja"]
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="2_v2dwo"]
@@ -42,8 +42,26 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(-8, 0), Vector2(0, 0), Vector2(0, 0), Vector2(8, 0), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_0njns"]
+resource_name = "card_idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -16), Vector2(0, 0), Vector2(0, 16), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lkm7v"]
 _data = {
+"card_idle": SubResource("Animation_0njns"),
 "monster_art_idle": SubResource("Animation_6ku2n"),
 "shake": SubResource("Animation_rxbos")
 }

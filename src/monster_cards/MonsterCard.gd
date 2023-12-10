@@ -122,5 +122,11 @@ func _on_selectable_area_mouse_entered() -> void:
 	result_card_panel.update_results_label(result_card)
 	result_card_panel.visible = true
 
+func play_idle_animation() -> void:
+	animation_player.play("card_idle")
+
+func stop_animation() -> void:
+	animation_player.stop()
+
 func _on_selectable_area_mouse_exited() -> void:
 	result_card_panel.visible = false

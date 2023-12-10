@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/monster_cards/MonsterCharacter.gd" id="1_p1rq1"]
 [ext_resource type="PackedScene" uid="uid://bk8sldh8eka1f" path="res://src/monster_cards/MonsterCard.tscn" id="2_a0lwi"]
-[ext_resource type="Texture2D" uid="uid://b2hno1lixu57o" path="res://src/monster_cards/goblins/glurm/glurm.png" id="3_ensrn"]
+[ext_resource type="Texture2D" path="res://src/monster_cards/goblins/glurm/glurm.png" id="3_ensrn"]
 [ext_resource type="Resource" uid="uid://cw5tfdy1xbn0b" path="res://src/monster_cards/goblins/glurm/GlurmPitchResultCard.tres" id="4_byk6d"]
 [ext_resource type="Resource" uid="uid://6nbvueoeh0iq" path="res://src/monster_cards/goblins/glurm/GlurmBatResultCard.tres" id="5_vitil"]
 
