@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dq3v50vt703jj"
-path.s3tc="res://.godot/imported/slaks.png-f73e3aac5f72f0ecc661fc7b72d3cd47.s3tc.ctex"
+path="res://.godot/imported/slaks.png-f73e3aac5f72f0ecc661fc7b72d3cd47.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://src/monster_cards/goblins/slaks_slugger/slaks.png"
-dest_files=["res://.godot/imported/slaks.png-f73e3aac5f72f0ecc661fc7b72d3cd47.s3tc.ctex"]
+dest_files=["res://.godot/imported/slaks.png-f73e3aac5f72f0ecc661fc7b72d3cd47.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

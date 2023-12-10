@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccip7jvju2lo3"
-path.s3tc="res://.godot/imported/baseball_diamond.png-55da1c169c96f2f89ca740ce4c34711f.s3tc.ctex"
+uid="uid://ci350d5jjp5fd"
+path="res://.godot/imported/baseball_diamond.png-55da1c169c96f2f89ca740ce4c34711f.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://src/managers/match_manager/bases_manager/baseball_diamond.png"
-dest_files=["res://.godot/imported/baseball_diamond.png-55da1c169c96f2f89ca740ce4c34711f.s3tc.ctex"]
+dest_files=["res://.godot/imported/baseball_diamond.png-55da1c169c96f2f89ca740ce4c34711f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
