@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0bwhro07ypud"
+path="res://.godot/imported/Thunder 1.mp3-b992255da2327db6febc130c81f966c5.mp3str"
+
+[deps]
+
+source_file="res://src/common/sfx/monster_mode/Thunder 1.mp3"
+dest_files=["res://.godot/imported/Thunder 1.mp3-b992255da2327db6febc130c81f966c5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

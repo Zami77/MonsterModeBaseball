@@ -7,7 +7,7 @@ signal special_card_moved_to_position
 
 @export var max_hand_size: int = 3
 @export var cards_in_hand_buffer: int = 16
-@export var speed_cards_move_in_pixels: int = 600
+@export var speed_cards_move_in_pixels: int = 800
 
 var cards_in_hand: Array[SpecialCardWrapper] = []
 
@@ -26,6 +26,8 @@ func _setup_hand() -> void:
 	for i in len(cards_in_hand):
 		_move_card_to_hand_position(cards_in_hand[i], i)
 		await special_card_moved_to_position
+	
+	await get_tree().create_timer(0.1).timeout # buffer to prevent soft lock
 	emit_signal("hand_setup")
 
 func _move_card_to_hand_position(special_card: SpecialCardWrapper, card_index: int) -> void:

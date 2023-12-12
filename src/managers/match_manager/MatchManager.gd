@@ -5,6 +5,7 @@ signal monster_moved_to_position
 signal special_card_moved_to_position
 signal all_monsters_in_dug_out
 signal back_to_main_menu
+signal camera_shake(trauma: float)
 
 @export var total_innings: int = 3
 @export var outs_per_inning: int = 3
@@ -251,7 +252,7 @@ func _next_frame() -> void:
 	_move_monsters_to_dug_out()
 	await all_monsters_in_dug_out
 	
-	if inning.current_inning > total_innings:
+	if inning.current_inning > total_innings and home_team.score != away_team.score:
 		_end_match()
 	else:
 		_setup_inning()
@@ -267,7 +268,10 @@ func _move_monster_to_position(monster_character: MonsterCharacter, target_pos: 
 
 func _move_special_card_to_position(special_card: SpecialCardWrapper, target_pos: Vector2) -> void:
 	var special_card_move_tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
-	special_card_move_tween.tween_property(special_card, "global_position", target_pos, 0.8)
+	var time_to_move = special_card.global_position.distance_to(target_pos) / 800
+	time_to_move = clampf(time_to_move, 0.2, 1.0)
+	
+	special_card_move_tween.tween_property(special_card, "global_position", target_pos, time_to_move)
 	await special_card_move_tween.finished
 	emit_signal("special_card_moved_to_position")
 
@@ -279,8 +283,8 @@ func _on_pitch_swing_button_pressed() -> void:
 
 func _is_valid_pitch_swing() -> bool:
 	return  (
-		match_state == MatchState.MID_MATCH or
-		special_cards_moving
+		match_state == MatchState.MID_MATCH and
+		not special_cards_moving
 	)
 
 func _on_run_scored(monster: MonsterCharacter) -> void:
@@ -308,7 +312,7 @@ func _on_out(monster: MonsterCharacter) -> void:
 	_update_stats_container()
 
 func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, _card_index: int) -> void:
-	if special_cards_moving:
+	if special_cards_moving or match_state == MatchState.MID_PITCH_SWING:
 		return
 	
 	special_cards_moving = true
@@ -319,8 +323,6 @@ func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, _card
 	else:
 		_move_special_card_to_position(special_card, bases_manager.batter_special_card_position.global_position)
 	
-	await get_tree().create_timer(0.1).timeout # buffer to prevent soft lock
-	
 	if special_card_selected:
 		special_card_hand.add_card_to_hand(special_card_selected)
 		special_card_selected = null
@@ -328,6 +330,7 @@ func _on_special_card_hand_card_selected(special_card: SpecialCardWrapper, _card
 		
 	special_card_selected = special_card
 	await special_card_moved_to_position
+	
 	special_cards_moving = false
 
 func _on_end_match_panel_back_to_main_menu() -> void:
@@ -339,6 +342,11 @@ func _on_monster_mode_button_pressed() -> void:
 func _setup_monster_mode() -> void:
 	print("Monster Mode: %s" % [is_monster_mode])
 	
+	if is_monster_mode:
+		AudioManager.play_monster_mode()
+		await get_tree().create_timer(0.7).timeout # wait for thunder sound
+		emit_signal("camera_shake", CameraManager.LARGE_BUMP)
+		
 	if inning.current_frame == InningFrame.TOP:
 		pitcher.monster_card.toggle_monster_mode(is_monster_mode)
 	else:
@@ -359,8 +367,8 @@ func _move_monsters_to_dug_out() -> void:
 
 func _update_stats_container() -> void:
 	at_bat_label.text = "At Bat: %s" % [
-		MonsterTeam.TeamName.keys()[away_team.monster_team_name] if inning.current_frame == InningFrame.TOP 
-		else MonsterTeam.TeamName.keys()[home_team.monster_team_name]]
-	inning_label.text = "%s of Inning %d" % [InningFrame.keys()[inning.current_frame], inning.current_inning]
+		MonsterTeam.get_monster_team_name_decorative(away_team.monster_team_name) if inning.current_frame == InningFrame.TOP 
+		else MonsterTeam.get_monster_team_name_decorative(home_team.monster_team_name)]
+	inning_label.text = "%s of Inning %d" % ["Top" if inning.current_frame == InningFrame.TOP else "Bottom", inning.current_inning]
 	outs_label.text = "Outs: %d" % [inning.current_outs]
 	score_label.text = "Home: %d Away: %d" % [home_team.score, away_team.score]

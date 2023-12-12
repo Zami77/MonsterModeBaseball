@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://gggencdkde3x"]
+[gd_scene load_steps=9 format=3 uid="uid://gggencdkde3x"]
 
 [ext_resource type="Script" path="res://src/managers/match_manager/MatchManager.gd" id="1_ccsw8"]
 [ext_resource type="PackedScene" uid="uid://ckxdks178b2gg" path="res://src/managers/match_manager/bases_manager/BasesManager.tscn" id="2_x2ck3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://gns8b3cfwrab" path="res://src/ui/themes/default_theme.tres" id="4_buni1"]
 [ext_resource type="Script" path="res://src/ui/default_button/DefaultButton.gd" id="5_t27ud"]
 [ext_resource type="PackedScene" uid="uid://c0716c08wvtya" path="res://src/managers/match_manager/special_card_hand_manager/SpecialCardHandManager.tscn" id="6_6d4m6"]
+[ext_resource type="FontFile" uid="uid://drdie27l6fefc" path="res://src/ui/fonts/JerseyclubGrungeBold-JRXVK.otf" id="6_h4nhy"]
 [ext_resource type="PackedScene" uid="uid://d01novt0hh55f" path="res://src/ui/end_match_panel/EndMatchPanel.tscn" id="7_nnlwy"]
 
 [node name="MatchManager" type="Node2D"]
@@ -27,7 +28,8 @@ script = ExtResource("5_t27ud")
 offset_left = 832.0
 offset_top = 8.0
 offset_right = 1136.0
-offset_bottom = 136.0
+offset_bottom = 144.0
+theme = ExtResource("4_buni1")
 
 [node name="GameStatsContainer" type="VBoxContainer" parent="StatsPanel"]
 layout_mode = 0
@@ -38,18 +40,22 @@ offset_bottom = 120.0
 
 [node name="AtBatLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h4nhy")
 text = "At Bat:"
 
 [node name="InningLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h4nhy")
 text = "Top of Inning 1"
 
 [node name="OutsLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h4nhy")
 text = "Top of Inning 1"
 
 [node name="ScoreLabel" type="Label" parent="StatsPanel/GameStatsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("6_h4nhy")
 text = "Home: 0	 Away: 0"
 
 [node name="SpecialCardHandManager" parent="." instance=ExtResource("6_6d4m6")]
