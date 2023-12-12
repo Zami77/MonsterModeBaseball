@@ -5,6 +5,7 @@ signal monster_moved_to_position
 signal special_card_moved_to_position
 signal all_monsters_in_dug_out
 signal back_to_main_menu
+signal camera_shake(trauma: float)
 
 @export var total_innings: int = 3
 @export var outs_per_inning: int = 3
@@ -341,6 +342,11 @@ func _on_monster_mode_button_pressed() -> void:
 func _setup_monster_mode() -> void:
 	print("Monster Mode: %s" % [is_monster_mode])
 	
+	if is_monster_mode:
+		AudioManager.play_monster_mode()
+		await get_tree().create_timer(0.7).timeout # wait for thunder sound
+		emit_signal("camera_shake", CameraManager.LARGE_BUMP)
+		
 	if inning.current_frame == InningFrame.TOP:
 		pitcher.monster_card.toggle_monster_mode(is_monster_mode)
 	else:

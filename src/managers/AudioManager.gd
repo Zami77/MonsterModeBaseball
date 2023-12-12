@@ -138,6 +138,8 @@ var umpire_safe_sfx = "res://src/common/sfx/umpire/Umpire_8.wav"
 
 var dice_roll_sfx = "res://src/dice_chucker/Roll 1d20.wav"
 
+var monster_mode_sfx = "res://src/common/sfx/monster_mode/Thunder 1.mp3"
+
 func _ready():
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
@@ -240,6 +242,9 @@ func play_umpire_play_ball() -> void:
 
 func play_dice_roll() -> void:
 	play_sfx(dice_roll_sfx)
+
+func play_monster_mode() -> void:
+	play_sfx(monster_mode_sfx)
 	
 func _fill_bags() -> void:
 	if not main_menu_bag:

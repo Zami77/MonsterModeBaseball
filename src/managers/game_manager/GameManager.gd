@@ -51,8 +51,12 @@ func _load_scene(scene_path: String) -> void:
 			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM)
 		)
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
+		current_scene.camera_shake.connect(_on_camera_shake)
 	
 	await transition_screen.faded_to_scene
+
+func _on_camera_shake(trauma: float) -> void:
+	camera.add_trauma(trauma)
 
 func _on_back_to_main_menu() -> void:
 	_load_scene(ScenePaths.main_menu)
