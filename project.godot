@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="BigModeJam_1"
+config/name="MonsterModeBaseball"
 run/main_scene="res://src/managers/game_manager/GameManager.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/image="res://src/YatchDraft8.png"
+boot_splash/use_filter=false
+config/icon="res://src/monster_cards/goblins/slaks_slugger/slaks.png"
 
 [autoload]
 

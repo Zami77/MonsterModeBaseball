@@ -254,7 +254,11 @@ func _next_frame() -> void:
 	_move_monsters_to_dug_out()
 	await all_monsters_in_dug_out
 	
-	if inning.current_inning > total_innings and home_team.score != away_team.score:
+	if (
+		inning.current_inning > total_innings and 
+		home_team.score != away_team.score and 
+		inning.current_frame == InningFrame.TOP
+	):
 		_end_match()
 	else:
 		_setup_inning()

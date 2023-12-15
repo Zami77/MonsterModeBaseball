@@ -28,8 +28,8 @@ func get_next_pitcher() -> MonsterCard.CardName:
 		current_pitcher = 0
 	return monster_card_name
 
-static func get_monster_team_name_decorative(monster_team_name: TeamName) -> String:
-	match monster_team_name:
+static func get_monster_team_name_decorative(team_name: TeamName) -> String:
+	match team_name:
 		TeamName.GOBLIN_TEAM:
 			return "Goblin Goons"
 		TeamName.KOBOLD_TEAM:
