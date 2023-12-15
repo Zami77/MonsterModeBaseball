@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/dice_roll.png-702d247ec4859161844abba0584e734
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

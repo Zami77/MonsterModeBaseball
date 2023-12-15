@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/dice_faces.png-bd96f07db845fd79264e9f0b4de72d
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
