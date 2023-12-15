@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://xhh85ivvyxph"]
 
-[ext_resource type="Texture2D" uid="uid://ccip7jvju2lo3" path="res://src/managers/match_manager/bases_manager/baseball_diamond.png" id="1_pmsil"]
+[ext_resource type="Texture2D" uid="uid://ci350d5jjp5fd" path="res://src/managers/match_manager/bases_manager/baseball_diamond.png" id="1_pmsil"]
 [ext_resource type="Script" path="res://src/ui/team_select_screen/TeamSelectScreen.gd" id="1_wavl1"]
 [ext_resource type="PackedScene" uid="uid://dfafk1vq1i83u" path="res://src/teams/selectable_team/SelectableTeam.tscn" id="3_t0rio"]
 
@@ -21,4 +21,8 @@ offset_right = 1024.0
 offset_bottom = 400.0
 alignment = 1
 
-[node name="SelectableTeam" parent="SelectableTeamsContainer" instance=ExtResource("3_t0rio")]
+[node name="GoblinSelectableTeam" parent="SelectableTeamsContainer" instance=ExtResource("3_t0rio")]
+
+[node name="KoboldSelectableTeam" parent="SelectableTeamsContainer" instance=ExtResource("3_t0rio")]
+position = Vector2(576, 0)
+monster_team_name = 1

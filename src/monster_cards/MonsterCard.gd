@@ -39,7 +39,11 @@ enum CardName {
 	SLAKS_SLUGGER = 0,
 	GLURM = 1,
 	PLOOG = 2,
-	ZEEG = 3
+	ZEEG = 3,
+	GAN = 4,
+	SNAX = 5,
+	SNOTT = 6,
+	UKO = 7
 }
 
 const NO_RANGE = -1

@@ -8,12 +8,14 @@ extends Node2D
 
 var current_scene = null
 var selected_monster_team_name: MonsterTeam.TeamName = MonsterTeam.TeamName.GOBLIN_TEAM
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	DataManager.load_game()
 	SettingsManager.load_settings()
 	transition_screen.visible = false
 	_load_scene(default_scene)
+	rng.randomize()
 
 func _load_scene(scene_path: String) -> void:
 	DataManager.save_game()
@@ -48,7 +50,7 @@ func _load_scene(scene_path: String) -> void:
 	if current_scene is MatchManager:
 		current_scene.setup(
 			MonsterTeamFactory.get_monster_team(selected_monster_team_name), 
-			MonsterTeamFactory.get_monster_team(MonsterTeam.TeamName.GOBLIN_TEAM)
+			MonsterTeamFactory.get_monster_team(_get_away_team())
 		)
 		current_scene.back_to_main_menu.connect(_on_back_to_main_menu)
 		current_scene.camera_shake.connect(_on_camera_shake)
@@ -78,3 +80,8 @@ func _on_main_menu_option_selected(option: MainMenu.Option) -> void:
 		MainMenu.Option.EXIT_GAME:
 			get_tree().quit()
 
+func _get_away_team() -> MonsterTeam.TeamName:
+	var all_teams = MonsterTeamFactory.all_monster_teams.duplicate()
+	all_teams.erase(selected_monster_team_name)
+	
+	return all_teams.pop_at(rng.randi_range(0, len(all_teams) - 1))
