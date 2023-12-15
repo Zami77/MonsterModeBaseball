@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7b67tyy4v67j"]
+
+[ext_resource type="Script" path="res://src/monster_cards/MonsterCharacter.gd" id="1_cekuj"]
+[ext_resource type="PackedScene" uid="uid://bk8sldh8eka1f" path="res://src/monster_cards/MonsterCard.tscn" id="2_3vjet"]
+[ext_resource type="Texture2D" uid="uid://bi7k4bcr41wld" path="res://src/monster_cards/kobolds/snott/snott_portrait.png" id="3_7jelu"]
+[ext_resource type="Resource" uid="uid://cw5tfdy1xbn0b" path="res://src/monster_cards/goblins/glurm/GlurmPitchResultCard.tres" id="4_rtox3"]
+[ext_resource type="Resource" uid="uid://6nbvueoeh0iq" path="res://src/monster_cards/goblins/glurm/GlurmBatResultCard.tres" id="5_m34fm"]
+
+[node name="Snott" type="Node2D"]
+script = ExtResource("1_cekuj")
+
+[node name="MonsterCard" parent="." instance=ExtResource("2_3vjet")]
+monster_name = "Snott"
+monster_texture = ExtResource("3_7jelu")
+pitch_result_card_resource = ExtResource("4_rtox3")
+bat_result_card_resource = ExtResource("5_m34fm")

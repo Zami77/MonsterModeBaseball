@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MonsterTeam" load_steps=2 format=3 uid="uid://bm04635kouvxu"]
+
+[ext_resource type="Script" path="res://src/teams/MonsterTeam.gd" id="1_eued5"]
+
+[resource]
+script = ExtResource("1_eued5")
+monster_characters = Array[int]([4, 6, 7, 5])
+monster_team_name = 1

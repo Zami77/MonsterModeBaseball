@@ -7,7 +7,10 @@ var score: int = 0
 var current_at_bat = 0
 var current_pitcher = 0
 
-enum TeamName { GOBLIN_TEAM }
+enum TeamName { 
+	GOBLIN_TEAM = 0,
+	KOBOLD_TEAM = 1
+}
 
 func get_next_at_bat() -> MonsterCard.CardName:
 	var monster_card_name = monster_characters[current_at_bat]
@@ -29,5 +32,7 @@ static func get_monster_team_name_decorative(monster_team_name: TeamName) -> Str
 	match monster_team_name:
 		TeamName.GOBLIN_TEAM:
 			return "Goblin Goons"
+		TeamName.KOBOLD_TEAM:
+			return "Krazy Kobolds"
 		_:
 			return "Goblin Goons"

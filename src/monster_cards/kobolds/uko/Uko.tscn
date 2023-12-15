@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://by0r0gwph5rsq"]
+
+[ext_resource type="Script" path="res://src/monster_cards/MonsterCharacter.gd" id="1_y04nt"]
+[ext_resource type="PackedScene" uid="uid://bk8sldh8eka1f" path="res://src/monster_cards/MonsterCard.tscn" id="2_8xkwn"]
+[ext_resource type="Texture2D" uid="uid://carq3pxy26jf4" path="res://src/monster_cards/kobolds/uko/uko_portrait.png" id="3_hkiuj"]
+[ext_resource type="Resource" uid="uid://c750bykm2uop1" path="res://src/monster_cards/kobolds/uko/UkoPitchResultCard.tres" id="4_vpibt"]
+[ext_resource type="Resource" uid="uid://cuybqlfalsmok" path="res://src/monster_cards/kobolds/uko/UkoBatResultCard.tres" id="5_0gbx1"]
+
+[node name="Uko" type="Node2D"]
+script = ExtResource("1_y04nt")
+
+[node name="MonsterCard" parent="." instance=ExtResource("2_8xkwn")]
+monster_name = "Uko"
+monster_texture = ExtResource("3_hkiuj")
+pitch_result_card_resource = ExtResource("4_vpibt")
+bat_result_card_resource = ExtResource("5_0gbx1")

@@ -223,8 +223,10 @@ func _end_match() -> void:
 	
 	if home_team.score > away_team.score:
 		end_match_panel.winning_team_label.text = "Home Team Wins!"
+		AudioManager.play_crowd_cheer()
 	else:
 		end_match_panel.winning_team_label.text = "Away Team Wins!"
+		AudioManager.play_crowd_boo()
 		
 	print("Home Team Score: %d" % [home_team.score])
 	print("Away Team Score: %d" % [away_team.score])
