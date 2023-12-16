@@ -18,12 +18,12 @@ var button_press = "res://src/ui/default_button/Click Plastic.wav"
 var button_hover = "res://src/ui/default_button/button_hover.wav"
 
 var main_menu_songs = [
-	"res://src/common/music/Ambient Exploration Main.ogg"
+	"res://src/common/music/Ambient-Exploration-Main.ogg"
 ]
 var main_menu_bag = []
 
 var match_songs = [
-	"res://src/common/music/HipHop Old Skool Main.ogg"
+	"res://src/common/music/HipHop-Old-Skool-Main.ogg"
 ]
 var match_songs_bag = []
 
